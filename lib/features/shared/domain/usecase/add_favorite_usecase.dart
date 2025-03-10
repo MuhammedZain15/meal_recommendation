@@ -1,0 +1,4 @@
+class AddFavoriteUsecase {
+
+  void execute() {}
+}
