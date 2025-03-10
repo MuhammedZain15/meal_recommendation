@@ -8,4 +8,7 @@ class AppImages {
   static const String lock = 'assets/images/Lock.svg';
   static const String food1 = 'assets/images/food1.png';
   static const String food2 = 'assets/images/food2.png';
+  static const String facebook = 'assets/images/Facebook.png';
+  static const String google = 'assets/images/Google.png';
+  static const String logo1 = 'assets/images/logo.png';
 }
