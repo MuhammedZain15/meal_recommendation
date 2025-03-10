@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/components/custom_button.dart';
 import 'package:meal_recommendation/core/components/custom_text_field.dart';
 import 'package:meal_recommendation/core/components/divider_with_text.dart';
 import 'package:meal_recommendation/core/components/remember_me_widget.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
 import 'package:meal_recommendation/core/utils/app_images.dart';
+import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:meal_recommendation/core/utils/app_styles.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -64,17 +66,23 @@ class LoginViewBody extends StatelessWidget {
                   ],
                 ),
                 Gap(34.h),
-                RichText(
-                  text: TextSpan(
-                    text: 'Don\'t have an account? ',
-                    style: TextStyle(color: Colors.white),
-                    children: [
-                      TextSpan(
-                        text: 'register now',
-                        style: AppStyles.font14W500WhiteColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Don\'t have an account?',
+                      style: AppStyles.font14W500WhiteColor,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context.pushNamed(AppRouter.kRegisterView);
+                      },
+                      child: Text(
+                        ' register now',
+                        style: AppStyles.font14W600WhiteColor,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
