@@ -1,10 +1,54 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:meal_recommendation/core/utils/app_images.dart';
+import 'package:meal_recommendation/core/utils/app_styles.dart';
 
-class SplashViewBody extends StatelessWidget {
+import '../../../core/utils/app_colors.dart';
+
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
   @override
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
+
+class _SplashViewBodyState extends State<SplashViewBody> {
+  @override
+  void initState() {
+    // Future.delayed(Duration(seconds: 2), () {
+    //   GoRouter.of(context).push(AppRouter.kOnboardingView);
+    // });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      backgroundColor: AppColors.kPrimary,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: BounceInUp(
+              animate: true,
+              child: Image.asset(
+                AppImages.logo,
+                width: screenWidth * 0.5,
+                height: screenHeight * 0.5,
+              ),
+            ),
+          ),
+          BounceInDown(
+            animate: true,
+            child: Text(
+              "Meal Recommendation",
+              style: AppStyles.font18W400WhiteColor,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

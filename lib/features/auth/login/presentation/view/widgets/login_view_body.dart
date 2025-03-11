@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/components/custom_button.dart';
@@ -11,8 +10,10 @@ import 'package:meal_recommendation/core/utils/app_images.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:meal_recommendation/core/utils/app_styles.dart';
 
-import 'divider_with_text.dart';
-import 'remember_me_widget.dart';
+import '../../../../../../core/components/divider_with_text.dart';
+import '../../../../../../core/components/remember_me_widget.dart';
+
+
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});

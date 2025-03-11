@@ -1,5 +1,5 @@
 class AppImages {
-  static const String logo = 'assets/images/logo.svg';
+  static const String logo = 'assets/images/logo.png';
   static const String background = 'assets/images/background.png';
   static const String settings = 'assets/images/settings.png';
   static const String search = 'assets/images/search.png';
