@@ -19,7 +19,7 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (context, state) {
-          return const SplashView();
+          return LoginView();
         },
       ),
       GoRoute(
@@ -36,6 +36,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kRegisterView,
+        name: kRegisterView,
         builder: (context, state) {
           return const RegisterView();
         },
@@ -55,6 +56,3 @@ abstract class AppRouter {
     ],
   );
 }
-      
-    
-  

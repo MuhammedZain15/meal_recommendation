@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:meal_recommendation/features/auth/presentation/view/login_view.dart';
+import 'package:meal_recommendation/core/utils/app_router.dart';
 
 import 'features/splash/splash_view.dart';
 
@@ -22,11 +21,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
+
       title: 'Meal Recommendation',
-      home: LoginView(),
+      routerConfig: AppRouter.router,
     );
   }
 }
