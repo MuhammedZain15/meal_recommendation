@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animate_do: ^4.2.0
   bloc: ^7.0.0
   cupertino_icons: ^1.0.8
   flutter:
@@ -39,6 +40,7 @@ dependencies:
   go_router: ^14.8.1
   google_fonts: ^6.2.1
   meta: ^1.16.0
+  smooth_page_indicator: ^1.2.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0
