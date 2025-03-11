@@ -1,3 +1,0 @@
-class VerificaionUsecase {
-  void execute() {}
-}
