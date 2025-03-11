@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 abstract class AppStyles {
   // font size 11
   static TextStyle font11W500WhiteColor = GoogleFonts.inter(
@@ -33,7 +32,8 @@ abstract class AppStyles {
     color: Colors.white,
   );
   static TextStyle textStyle13(BuildContext context) => TextStyle(
-        fontSize: 13.sp        ,       color: Colors.grey[600],
+        fontSize: 13.sp,
+        color: Colors.grey[600],
         fontWeight: FontWeight.bold,
       );
 
@@ -62,6 +62,7 @@ abstract class AppStyles {
     fontWeight: FontWeight.w700,
     color: AppColors.kPrimary,
   );
+
   static TextStyle textStyle30(BuildContext context) => TextStyle(
         fontSize: 30.sp,
         color: Colors.white,
