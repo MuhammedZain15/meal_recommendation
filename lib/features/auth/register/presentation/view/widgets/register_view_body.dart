@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_recommendation/core/components/by_create_account_widget.dart';
+import 'package:meal_recommendation/core/components/remember_me_widget.dart';
 import '../../../../../../core/components/custom_button.dart';
 import '../../../../../../core/components/custom_text_field.dart';
 import '../../../../../../core/components/divider_with_text.dart';
@@ -16,7 +16,7 @@ class RegisterViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
+    return SingleChildScrollView(
       child: Stack(
         children: [
           Image.asset(
@@ -37,23 +37,23 @@ class RegisterViewBody extends StatelessWidget {
                   icon: Icons.person_4_outlined,
                 ),
                 Gap(22.h),
-            CustomTextFormField(
-            label: 'Email Address',
-            icon: Icons.person_4_outlined,
-          ),
-              Gap(22.h),
-            CustomTextFormField(
-            label: 'Phone',
-            icon: Icons.person_4_outlined,
-                    ),
-                   Gap(22.h),
+                CustomTextFormField(
+                  label: 'Email Address',
+                  icon: Icons.person_4_outlined,
+                ),
+                Gap(22.h),
+                CustomTextFormField(
+                  label: 'Phone',
+                  icon: Icons.person_4_outlined,
+                ),
+                Gap(22.h),
                 CustomTextFormField(
                   isPassword: true,
                   label: 'password',
                   icon: Icons.lock_outline_rounded,
                 ),
                 Gap(15.h),
-                ByCreateAccountWidget(value: false, onChanged: (value) {}),
+                RememberMeWidget(value: false, onChanged: (value) {}),
                 Gap(48.h),
                 CustomButton(text: 'Register', onPressed: () {}),
                 Gap(24.h),
