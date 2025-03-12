@@ -1,9 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/utils/app_images.dart';
 import 'package:meal_recommendation/core/utils/app_styles.dart';
 
 import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_router.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -15,9 +17,9 @@ class SplashViewBody extends StatefulWidget {
 class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
-    // Future.delayed(Duration(seconds: 2), () {
-    //   GoRouter.of(context).push(AppRouter.kOnboardingView);
-    // });
+    Future.delayed(Duration(seconds: 2), () {
+      GoRouter.of(context).push(AppRouter.kOnboardingView);
+    });
     super.initState();
   }
 
