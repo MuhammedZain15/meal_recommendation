@@ -33,23 +33,23 @@ class RegisterViewBody extends StatelessWidget {
                 Image.asset(AppImages.logo1),
                 Gap(70.h),
                 CustomTextFormField(
-                  label: 'Full name',
+                  hintText: 'Full name',
                   icon: Icons.person_4_outlined,
                 ),
                 Gap(22.h),
                 CustomTextFormField(
-                  label: 'Email Address',
+                  hintText: 'Email Address',
                   icon: Icons.person_4_outlined,
                 ),
                 Gap(22.h),
                 CustomTextFormField(
-                  label: 'Phone',
+                  hintText: 'Phone',
                   icon: Icons.person_4_outlined,
                 ),
                 Gap(22.h),
                 CustomTextFormField(
                   isPassword: true,
-                  label: 'password',
+                  hintText: 'password',
                   icon: Icons.lock_outline_rounded,
                 ),
                 Gap(15.h),
