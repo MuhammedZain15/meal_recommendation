@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
-  final String label;
+  final String hintText;
   final IconData? icon;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
@@ -18,7 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.controller,
-    required this.label,
+    required this.hintText,
     this.icon,
     this.validator,
     this.keyboardType,
@@ -39,9 +39,12 @@ class CustomTextFormField extends StatelessWidget {
         border: Border.all(color: Colors.white.withOpacity(0.3)),
       ),
       child: TextFormField(
+        enabled: true,
         controller: controller,
         obscureText: isPassword && !(isPasswordVisible ?? false),
         keyboardType: keyboardType,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+
         validator: validator,
         onChanged: onChanged,
         readOnly: readOnly,
@@ -62,7 +65,7 @@ class CustomTextFormField extends StatelessWidget {
                 ]
                 : null,
         decoration: InputDecoration(
-          hintText: label,
+          hintText: hintText,
           hintStyle: TextStyle(
             color: Colors.white.withOpacity(0.7),
             fontSize: 16,
