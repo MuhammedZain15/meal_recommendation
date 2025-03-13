@@ -18,7 +18,9 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2), () {
-      GoRouter.of(context).push(AppRouter.kOnboardingView);
+      if (mounted) {
+        GoRouter.of(context).pushReplacement(AppRouter.kOnboardingView);
+      }
     });
     super.initState();
   }

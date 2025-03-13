@@ -6,7 +6,6 @@ import 'package:meal_recommendation/core/components/remember_me_widget.dart';
 import '../../../../../../core/components/custom_button.dart';
 import '../../../../../../core/components/custom_text_field.dart';
 import '../../../../../../core/components/divider_with_text.dart';
-import '../../../../../../core/utils/app_colors.dart';
 import '../../../../../../core/utils/app_images.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/app_styles.dart';
