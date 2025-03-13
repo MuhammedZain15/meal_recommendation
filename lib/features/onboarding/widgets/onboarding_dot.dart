@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meal_recommendation/core/utils/app_colors.dart';
 
 class OnboardingDot extends StatelessWidget {
   final bool isActive;
@@ -13,7 +14,7 @@ class OnboardingDot extends StatelessWidget {
       height: 10,
       width: 30,
       decoration: BoxDecoration(
-        color: isActive ? Colors.blueAccent : Colors.grey,
+        color: isActive ? AppColors.kPrimary : AppColors.kGrey,
         borderRadius: BorderRadius.circular(5),
       ),
     );

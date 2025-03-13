@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meal_recommendation/core/utils/app_colors.dart';
+import 'package:meal_recommendation/core/utils/app_strings.dart';
 
 class NavigationButton extends StatelessWidget {
   final bool isNext;
@@ -42,9 +44,15 @@ class NavigationButton extends StatelessWidget {
         }
       },
       child: Text(
+        style: TextStyle(
+          color: AppColors.kPrimary,
+          fontWeight: FontWeight.w700,
+        ),
         isNext
-            ? (currentPage == totalPages - 1 ? "Login" : "Next")
-            : (currentPage > 0 ? "Prev" : "Skip"),
+            ? (currentPage == totalPages - 1
+                ? AppStrings.kLogin
+                : AppStrings.kNext)
+            : (currentPage > 0 ? AppStrings.kPrev : AppStrings.kSkip),
       ),
     );
   }

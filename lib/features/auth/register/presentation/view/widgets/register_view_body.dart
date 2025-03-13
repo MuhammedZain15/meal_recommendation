@@ -64,7 +64,6 @@ class RegisterViewBody extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 33.r,
-                      backgroundColor: AppColors.kSecondary,
                       child: Image.asset(AppImages.facebook),
                     ),
                     SizedBox(width: 53.w),

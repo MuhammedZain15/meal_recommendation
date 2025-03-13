@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meal_recommendation/core/utils/app_styles.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
@@ -62,7 +62,7 @@ class OnboardingPageView extends StatelessWidget {
               SizedBox(height: 13),
               Text(
                 title,
-                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                style: AppStyles.font18BoldPrimaryColor,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 15),
@@ -70,7 +70,7 @@ class OnboardingPageView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   description,
-                  style: TextStyle(fontSize: 14.sp),
+                  style: AppStyles.font13W700PrimaryColor,
                   textAlign: TextAlign.center,
                 ),
               ),
