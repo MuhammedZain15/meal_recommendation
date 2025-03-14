@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_colors.dart';
+import '../utils/app_styles.dart';
+
 class StyledElevatedButton extends StatelessWidget {
-  const StyledElevatedButton({super.key});
+  const StyledElevatedButton({super.key, this.onPressed, required this.text});
+
+  final void Function()? onPressed;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: () {}, child: const Text('Button'));
+    return SizedBox(
+      height: 68,
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          ),
+          backgroundColor: WidgetStatePropertyAll(AppColors.kPrimary),
+        ),
+        child: Text(text, style: AppStyles.font22W700WhiteColor),
+      ),
+    );
   }
 }
- 
-     // TODO: implement This Button in the following files: 
-
-    // lib/features/profile/presentation/view/widgets/profile_view_body.dart
-    // lib/features/home/presentation/view/widgets/recipe_details_view_body.dart
-
