@@ -55,4 +55,9 @@ abstract class AppStyles {
     fontWeight: FontWeight.w700,
     color: AppColors.kPrimary,
   );
+  static TextStyle get font22W700WhiteColor => TextStyle(
+    fontSize: 22.sp,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
 }
