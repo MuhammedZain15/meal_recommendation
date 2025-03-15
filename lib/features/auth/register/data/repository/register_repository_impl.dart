@@ -1,5 +1,109 @@
-
-
+import '../../../entity/user.dart';
+import '../../domain/entities/user entity.dart';
 import '../../domain/repository/register_repository.dart';
+import '../data_source/register_datasource.dart';
 
-class RegisterRepositoryImpl implements RegisterRepository {}
+class AuthRepositoryImpl implements AuthRepository {
+  final AuthRemoteDataSource remoteDataSource;
+
+  AuthRepositoryImpl({required this.remoteDataSource});
+
+  @override
+  Future<UserEntity> signUpWithEmail(
+      String email, String password, String username, String phone) async {
+    try {
+      return await remoteDataSource.signUpWithEmail(
+          email, password, username, phone);
+    } catch (e) {
+      throw Exception("Sign-up failed: $e");
+    }
+  }
+
+  @override
+  Future<UserEntity> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) throw Exception("Google Sign-In canceled");
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = userCredential.user;
+      if (user == null) throw Exception("Google Sign-In failed");
+
+      // Check if user exists in Firestore
+      final docSnapshot = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.uid)
+          .get();
+
+      if (!docSnapshot.exists) {
+        final newUser = UserModel(
+          uid: user.uid,
+          username: user.displayName ?? "No Name",
+          email: user.email!,
+          phone: user.phoneNumber ?? "",
+          password: "", // Google users don’t have a password
+        );
+
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user.uid)
+            .set(newUser.toJson());
+        return newUser;
+      }
+
+      return UserModel.fromFirebase(docSnapshot.data()!);
+    } catch (e) {
+      throw Exception("Google Sign-In failed: $e");
+    }
+  }
+
+  @override
+  Future<UserEntity> signInWithFacebook() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+      if (result.status != LoginStatus.success)
+        throw Exception("Facebook login failed");
+
+      final AuthCredential credential =
+          FacebookAuthProvider.credential(result.accessToken!.token);
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = userCredential.user;
+      if (user == null) throw Exception("Facebook Sign-In failed");
+
+      // Check if user exists in Firestore
+      final docSnapshot = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.uid)
+          .get();
+
+      if (!docSnapshot.exists) {
+        final newUser = UserModel(
+          uid: user.uid,
+          username: user.displayName ?? "No Name",
+          email: user.email!,
+          phone: user.phoneNumber ?? "",
+          password: "", // Facebook users don’t have a password
+        );
+
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user.uid)
+            .set(newUser.toJson());
+        return newUser;
+      }
+
+      return UserModel.fromFirebase(docSnapshot.data()!);
+    } catch (e) {
+      throw Exception("Facebook Sign-In failed: $e");
+    }
+  }
+}
