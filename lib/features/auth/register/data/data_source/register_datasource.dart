@@ -6,12 +6,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../../shared/model/user_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<UserModel> signUpWithEmail(
-    String email,
-    String password,
-    String username,
-    String phone,
-  );
+  Future<UserModel> signUpWithEmail({
+    required String email,
+    required String password,
+    required String username,
+    required String phone,
+  });
   Future<UserModel> signInWithGoogle();
   Future<UserModel> signInWithFacebook();
 }
@@ -23,12 +23,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({required this.auth, required this.firestore});
 
   @override
-  Future<UserModel> signUpWithEmail(
-    String email,
-    String password,
-    String username,
-    String phone,
-  ) async {
+  Future<UserModel> signUpWithEmail({
+    required String email,
+    required String password,
+    required String username,
+    required String phone,
+  }) async {
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,

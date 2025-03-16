@@ -4,7 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../shared/model/user_model.dart';
-import '../../domain/entities/user_entity.dart';
+import '../../domain/entities/user entity.dart';
 import '../../domain/repository/register_repository.dart';
 import '../data_source/register_datasource.dart';
 
@@ -14,18 +14,18 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<UserEntity> signUpWithEmail(
-    String email,
-    String password,
-    String username,
-    String phone,
-  ) async {
+  Future<UserEntity> signUpWithEmail({
+    required String email,
+    required String password,
+    required String username,
+    required String phone,
+  }) async {
     try {
       return await remoteDataSource.signUpWithEmail(
-        email,
-        password,
-        username,
-        phone,
+        email: email,
+        password: password,
+        username: username,
+        phone: phone,
       );
     } catch (e) {
       throw Exception("Sign-up failed: $e");

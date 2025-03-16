@@ -6,9 +6,9 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:meal_recommendation/core/helpers/firebase_init.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await firebaseInit();
+  firebaseInit();
   WakelockPlus.enable();
   runApp(
     ScreenUtilInit(
