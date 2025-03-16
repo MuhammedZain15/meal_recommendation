@@ -4,9 +4,9 @@ import '../repository/register_repository.dart';
 class SignInWithFacebook {
   final AuthRepository repository;
 
-  SignInWithFacebook({required this.repository});
+  SignInWithFacebook(this.repository);
 
-  Future<UserEntity> call() {
+  Future<UserEntity> execute() {
     return repository.signInWithFacebook();
   }
 }

@@ -1,8 +1,12 @@
-import '../entities/user entity.dart';
+import '../entities/user_entity.dart';
 
 abstract class AuthRepository {
-  Future<UserEntity> signUpWithEmail(
-      String email, String password, String username, String phone);
+  Future<UserEntity> signUpWithEmail({
+    required String email,
+    required String password,
+    required String username,
+    required String phone,
+  });
   Future<UserEntity> signInWithGoogle();
   Future<UserEntity> signInWithFacebook();
 }

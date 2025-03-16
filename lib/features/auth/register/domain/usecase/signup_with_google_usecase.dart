@@ -4,9 +4,9 @@ import '../repository/register_repository.dart';
 class SignInWithGoogle {
   final AuthRepository repository;
 
-  SignInWithGoogle({required this.repository});
+  SignInWithGoogle(this.repository);
 
-  Future<UserEntity> call() {
+  Future<UserEntity> execute() {
     return repository.signInWithGoogle();
   }
 }

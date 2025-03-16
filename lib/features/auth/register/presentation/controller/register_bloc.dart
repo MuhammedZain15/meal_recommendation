@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 
-import '../../domain/usecase/sign up with facebook usecase.dart';
-import '../../domain/usecase/sign up with google usecase.dart';
-import '../../domain/usecase/signup with email usecase.dart';
+import '../../domain/usecase/signup_with_facebook_usecase.dart';
+import '../../domain/usecase/signup_with_google_usecase.dart';
+import '../../domain/usecase/signup_with_email_usecase.dart';
 import 'register_event.dart';
 import 'register_states.dart';
 
