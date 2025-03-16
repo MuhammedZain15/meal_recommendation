@@ -12,7 +12,7 @@ class DividerWithText extends StatelessWidget {
         Expanded(child: Divider(color: Colors.white.withValues(alpha: 0.5))),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(text, style: TextStyle(color: Colors.white)),
+          child: Text('Or $text with', style: TextStyle(color: Colors.white)),
         ),
         Expanded(child: Divider(color: Colors.white.withValues(alpha: 0.5))),
       ],

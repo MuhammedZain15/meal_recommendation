@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:meal_recommendation/core/helpers/firebase_init.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
 
-Future<void> main() async {
+import 'core/services/service_locator.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebaseInit();
+  serviceLocator();
+
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812),
