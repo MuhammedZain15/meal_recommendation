@@ -2,7 +2,7 @@ import '../entities/user entity.dart';
 import '../repository/register_repository.dart';
 
 class SignInWithFacebookUseCase {
-  final AuthRepository repository;
+  final RegisterRepository repository;
 
   SignInWithFacebookUseCase(this.repository);
 

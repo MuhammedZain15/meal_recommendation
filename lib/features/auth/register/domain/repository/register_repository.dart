@@ -1,7 +1,6 @@
-
 import '../entities/user entity.dart';
 
-abstract class AuthRepository {
+abstract class RegisterRepository {
   Future<UserEntity> signUpWithEmail({
     required String email,
     required String password,

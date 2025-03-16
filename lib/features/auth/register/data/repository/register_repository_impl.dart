@@ -8,10 +8,10 @@ import '../../domain/entities/user entity.dart';
 import '../../domain/repository/register_repository.dart';
 import '../data_source/register_datasource.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource remoteDataSource;
+class RegisterRepositoryImpl implements RegisterRepository {
+  final RegisterRemoteDataSource remoteDataSource;
 
-  AuthRepositoryImpl({required this.remoteDataSource});
+  RegisterRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<UserEntity> signUpWithEmail({

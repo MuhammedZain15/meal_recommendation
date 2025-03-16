@@ -2,7 +2,7 @@ import '../entities/user entity.dart';
 import '../repository/register_repository.dart';
 
 class SignUpWithEmailUseCase {
-  final AuthRepository repository;
+  final RegisterRepository repository;
 
   SignUpWithEmailUseCase(this.repository);
 
