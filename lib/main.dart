@@ -1,25 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meal_recommendation/features/auth/register/data/data_source/register_datasource.dart';
-import 'package:meal_recommendation/features/auth/register/data/repository/register_repository_impl.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'package:meal_recommendation/core/helpers/firebase_init.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
 
+import 'core/services/service_locator.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await firebaseInit();
-  WakelockPlus.enable();
- await RegisterRepositoryImpl(
-    remoteDataSource: RegisterRemoteDataSourceImpl(
-      auth: FirebaseAuth.instance,
-      firestore: FirebaseFirestore.instance,
-    ),
-  ).signInWithFacebook();
+  await firebaseInit();
+  serviceLocator();
 
   runApp(
     ScreenUtilInit(
