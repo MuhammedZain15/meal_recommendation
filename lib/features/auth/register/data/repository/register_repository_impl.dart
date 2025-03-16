@@ -4,7 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../shared/model/user_model.dart';
-import '../../domain/entities/user entity.dart';
+import '../../domain/entities/user_entity.dart';
 import '../../domain/repository/register_repository.dart';
 import '../data_source/register_datasource.dart';
 
@@ -83,8 +83,9 @@ class RegisterRepositoryImpl implements RegisterRepository {
   Future<UserEntity> signInWithFacebook() async {
     try {
       final LoginResult result = await FacebookAuth.instance.login();
-      if (result.status != LoginStatus.success)
+      if (result.status != LoginStatus.success) {
         throw Exception("Facebook login failed");
+      }
 
       final AuthCredential credential = FacebookAuthProvider.credential(
         result.accessToken!.tokenString,

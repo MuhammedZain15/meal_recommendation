@@ -1,4 +1,4 @@
-import '../entities/user entity.dart';
+import '../entities/user_entity.dart';
 
 abstract class RegisterRepository {
   Future<UserEntity> signUpWithEmail({

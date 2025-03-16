@@ -81,8 +81,9 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
   @override
   Future<UserModel> signInWithFacebook() async {
     final LoginResult result = await FacebookAuth.instance.login();
-    if (result.status != LoginStatus.success)
+    if (result.status != LoginStatus.success) {
       throw Exception("Facebook login failed");
+    }
 
     final AuthCredential credential = FacebookAuthProvider.credential(
       result.accessToken!.tokenString,
