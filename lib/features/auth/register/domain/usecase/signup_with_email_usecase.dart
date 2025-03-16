@@ -1,10 +1,10 @@
 import '../entities/user entity.dart';
 import '../repository/register_repository.dart';
 
-class SignUpWithEmail {
+class SignUpWithEmailUseCase {
   final AuthRepository repository;
 
-  SignUpWithEmail(this.repository);
+  SignUpWithEmailUseCase(this.repository);
 
   Future<UserEntity> execute({
     required String email,

@@ -7,9 +7,9 @@ import 'register_event.dart';
 import 'register_states.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final SignUpWithEmail signUpWithEmail;
-  final SignInWithGoogle signInWithGoogle;
-  final SignInWithFacebook signInWithFacebook;
+  final SignUpWithEmailUseCase signUpWithEmail;
+  final SignInWithGoogleUseCase signInWithGoogle;
+  final SignInWithFacebookUseCase signInWithFacebook;
 
   AuthBloc({
     required this.signUpWithEmail,
@@ -19,8 +19,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpWithEmailEvent>((event, emit) async {
       emit(AuthLoading());
       try {
-        final user = await signUpWithEmail(
-            event.email, event.password, event.username, event.phone);
+        final user = await signUpWithEmail.execute(
+          email: event.email,
+          password: event.password,
+          username: event.username,
+          phone: event.phone,
+        );
         emit(AuthSuccess(user));
       } catch (e) {
         emit(AuthFailure(e.toString()));
@@ -30,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInWithGoogleEvent>((event, emit) async {
       emit(AuthLoading());
       try {
-        final user = await signInWithGoogle();
+        final user = await signInWithGoogle.execute();
         emit(AuthSuccess(user));
       } catch (e) {
         emit(AuthFailure(e.toString()));
@@ -40,7 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInWithFacebookEvent>((event, emit) async {
       emit(AuthLoading());
       try {
-        final user = await signInWithFacebook();
+        final user = await signInWithFacebook.execute();
         emit(AuthSuccess(user));
       } catch (e) {
         emit(AuthFailure(e.toString()));
