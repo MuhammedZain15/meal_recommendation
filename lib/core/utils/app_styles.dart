@@ -20,7 +20,6 @@ abstract class AppStyles {
     color: AppColors.kPrimary,
   );
 
-
   static TextStyle get font14W500WhiteColor => TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
@@ -38,6 +37,16 @@ abstract class AppStyles {
     fontWeight: FontWeight.w700,
     color: AppColors.kPrimary,
   );
+  static TextStyle get font15Ww500PrimaryColor => TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.kPrimary,
+  );
+  static TextStyle get font15Ww500DarkGreyColor => TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.kDarkGrey,
+  );
 
   static TextStyle get font18W400WhiteColor => TextStyle(
     fontSize: 18.sp,
@@ -48,6 +57,11 @@ abstract class AppStyles {
     fontSize: 18.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.kPrimary,
+  );
+  static TextStyle get font20BoldBlackColor => TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.kBlack,
   );
 
   static TextStyle get font21W700PrimaryColor => TextStyle(
