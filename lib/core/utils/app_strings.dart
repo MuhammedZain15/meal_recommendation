@@ -29,6 +29,7 @@ class AppStrings {
   static const String kRecommendedRecipes = 'Recommended Recipes';
   static const String kSummary = 'Summary';
   static const String kIngredients = 'Ingredients';
+  static const String kMin = 'min';
   static const String kDirections = 'Directions';
   static const String kSearchRecipes = 'Search Recipes';
   static const String kSeeAll = 'See all';
