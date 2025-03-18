@@ -18,6 +18,8 @@ abstract class AppRouter {
   static const kHomeView = '/homeView';
   static const kSplashView = '/';
   static const kOnboardingView = '/onboardingView';
+  static const kSeeAllView = '/seeAllView';
+  static const kDetailsView = '/detailsView';
   static const kLoginView = '/loginView';
   static const kRegisterView = '/registerView';
   static const kVerificationView = '/verificationView';
