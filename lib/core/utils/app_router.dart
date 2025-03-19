@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/services/service_locator.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_email_usecase.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_google_usecase.dart';
+import 'package:meal_recommendation/features/favorite/domain/use_cases/get_favorite_meals_use_case.dart';
+import 'package:meal_recommendation/features/favorite/presentation/controller/favorites_bloc.dart';
+import 'package:meal_recommendation/features/favorite/presentation/pages/favorite_view.dart';
 import 'package:meal_recommendation/features/home/presentation/view/home_view.dart';
 import 'package:meal_recommendation/features/onboarding/onboarding_view.dart';
 import 'package:meal_recommendation/features/splash/splash_view.dart';
@@ -24,20 +27,21 @@ abstract class AppRouter {
   static const kRegisterView = '/registerView';
   static const kVerificationView = '/verificationView';
   static const kProfileView = '/profileView';
+  static const kFavoriteView = '/favoriteView';
 
   static final GoRouter router = GoRouter(
-    initialLocation: kSplashView,
+    initialLocation: kFavoriteView,
     routes: [
       GoRoute(
         path: kSplashView,
         builder: (context, state) {
-          return SplashView();
+          return const SplashView();
         },
       ),
       GoRoute(
         path: kOnboardingView,
         builder: (context, state) {
-          return OnboardingView();
+          return const OnboardingView();
         },
       ),
 
@@ -64,7 +68,7 @@ abstract class AppRouter {
                   signInWithGoogle: sl<SignInWithGoogleUseCase>(),
                   signInWithFacebook: sl<SignInWithFacebookUseCase>(),
                 ),
-            child: RegisterView(),
+            child: const RegisterView(),
           );
         },
       ),
@@ -72,6 +76,15 @@ abstract class AppRouter {
         path: kVerificationView,
         builder: (context, state) {
           return const VerificationView();
+        },
+      ),
+      GoRoute(
+        path: AppRouter.kFavoriteView,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => FavoritesCubit(sl<GetFavoriteMeals>())..fetchFavorites(),
+            child: const FavoriteView(),
+          );
         },
       ),
       GoRoute(

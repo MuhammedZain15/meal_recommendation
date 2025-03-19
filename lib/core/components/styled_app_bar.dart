@@ -12,11 +12,11 @@ class StyledAppBar extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {},
-          icon: Icon(FontAwesomeIcons.bars, color: AppColors.kPrimary),
+          icon: const Icon(FontAwesomeIcons.bars, color: AppColors.kPrimary),
         ),
         IconButton(
           onPressed: () {},
-          icon: Icon(FontAwesomeIcons.solidBell, color: AppColors.kPrimary),
+          icon: const Icon(FontAwesomeIcons.solidBell, color: AppColors.kPrimary),
         ),
       ],
     );
