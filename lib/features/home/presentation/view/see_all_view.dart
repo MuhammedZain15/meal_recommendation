@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meal_recommendation/core/utils/app_colors.dart';
 
 import 'widgets/see_all_view_body.dart';
 
@@ -7,8 +8,12 @@ class SeeAllView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const SeeAllViewBody(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.kGrey,
+        
+        body: const SeeAllViewBody(),
+      ),
     );
   }
 }
