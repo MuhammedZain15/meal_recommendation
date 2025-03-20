@@ -19,7 +19,7 @@ class SeeAllViewBody extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Treanding Recipes",
+                  "Trending Recipes",
                   style: AppStyles.font18BoldBlackColor,
                 ),
               ),
