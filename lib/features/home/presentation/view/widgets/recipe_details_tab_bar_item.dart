@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
 import 'package:meal_recommendation/core/utils/app_styles.dart';
@@ -13,7 +14,7 @@ class RecipeDetailsTabBarItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Tab Bar
+          // Tab Bar (Fixed)
           TabBar(
             labelColor: AppColors.kPrimary,
             unselectedLabelColor: Colors.grey,
@@ -29,32 +30,18 @@ class RecipeDetailsTabBarItem extends StatelessWidget {
             indicatorWeight: 5,
             dividerColor: Colors.transparent,
             indicatorColor: AppColors.kPrimary,
-            tabs: [
-              Tab(
-                child: Text(
-                  "Summary",
-                ),
-              ),
-              Tab(
-                child: FittedBox(
-                  child: Text(
-                    "Ingredients",
-                  ),
-                ),
-              ),
-              Tab(
-                child: FittedBox(
-                  child: Text(
-                    "Direction",
-                  ),
-                ),
-              ),
+            tabs: const [
+              Tab(text: "Summary"),
+              Tab(text: "Ingredients"),
+              Tab(text: "Direction"),
             ],
           ),
+
+          // Tab Content (Flexible & Scrollable)
           Expanded(
-            child: const TabBarView(
+            child: TabBarView(
               children: [
-                SummaryTab(),
+                SummaryTab(), // Already scrollable inside
                 Center(child: Text("Ingredients Section")),
                 Center(child: Text("Directions Section")),
               ],

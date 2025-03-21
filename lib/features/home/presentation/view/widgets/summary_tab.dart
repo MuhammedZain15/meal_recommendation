@@ -6,9 +6,10 @@ class SummaryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,8 +28,9 @@ class SummaryTab extends StatelessWidget {
               crossAxisSpacing: 25,
               mainAxisSpacing: 10,
               childAspectRatio: 1,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true, // Allows GridView to take only needed space
+              physics:
+                  const NeverScrollableScrollPhysics(), // Prevents scrolling issues
               children: const [
                 NutritionItem(title: "protein", value: "40g"),
                 NutritionItem(title: "carp", value: "40g"),

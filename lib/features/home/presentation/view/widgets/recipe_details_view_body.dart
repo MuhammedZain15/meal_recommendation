@@ -11,11 +11,11 @@ class RecipeDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
+    return CustomScrollView(
+      slivers: [
+        // App Bar
+        SliverToBoxAdapter(
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: StyledAppBar(
               onLeadingTap: () => context.pop(),
@@ -23,9 +23,12 @@ class RecipeDetailsViewBody extends StatelessWidget {
               suffixIcon: Icons.favorite_border_rounded,
             ),
           ),
-          const Gap(10),
-          // Recipe Image
-          Container(
+        ),
+        const SliverGap(10),
+
+        // Recipe Image
+        SliverToBoxAdapter(
+          child: Container(
             height: 250,
             width: double.infinity,
             decoration: BoxDecoration(
@@ -35,40 +38,49 @@ class RecipeDetailsViewBody extends StatelessWidget {
               ),
             ),
           ),
-          const Gap(10),
-          // Recipe Title
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text('Shawarma', style: AppStyles.font23BoldBlackColor),
-          ),
-          const Gap(5),
-          // Recipe Subtitle
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                      text: 'meat .  ',
-                      style: AppStyles.font15Ww500DarkGreyColor),
-                  TextSpan(
-                      text: '14min . ',
-                      style: AppStyles.font15Ww500DarkGreyColor),
-                  TextSpan(
-                      text: '1 serving',
-                      style: AppStyles.font15Ww500DarkGreyColor),
-                ],
+        ),
+        const SliverGap(10),
+
+        // Recipe Title
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Text('Shawarma', style: AppStyles.font23BoldBlackColor),
               ),
-            ),
+              const Gap(5),
+
+              // Recipe Subtitle
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                          text: 'meat .  ',
+                          style: AppStyles.font15Ww500DarkGreyColor),
+                      TextSpan(
+                          text: '14min . ',
+                          style: AppStyles.font15Ww500DarkGreyColor),
+                      TextSpan(
+                          text: '1 serving',
+                          style: AppStyles.font15Ww500DarkGreyColor),
+                    ],
+                  ),
+                ),
+              ),
+              const Gap(20),
+            ],
           ),
-          const Gap(20),
-          // Ensure RecipeDetailsTabBarItem has a fixed height to prevent infinite height issues
-          SizedBox(
-            height: 600, // Adjust height as needed
-            child: RecipeDetailsTabBarItem(),
-          ),
-        ],
-      ),
+        ),
+
+        // Recipe Details Tab Bar & Content
+        SliverFillRemaining(
+          hasScrollBody: true, // Allows scrolling within Tab content
+          child: RecipeDetailsTabBarItem(),
+        ),
+      ],
     );
   }
 }
