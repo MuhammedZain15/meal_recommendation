@@ -3,7 +3,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
 
 class StyledAppBar extends StatelessWidget {
-  const StyledAppBar({super.key});
+  const StyledAppBar(
+      {super.key,
+      this.leadingIcon,
+      this.suffixIcon,
+      this.onLeadingTap,
+      this.onSuffixTap});
+  final IconData? leadingIcon;
+  final IconData? suffixIcon;
+  final void Function()? onLeadingTap;
+  final void Function()? onSuffixTap;
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +20,14 @@ class StyledAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          onPressed: () {},
-          icon: Icon(FontAwesomeIcons.bars, color: AppColors.kPrimary),
+          onPressed: onLeadingTap ?? () {},
+          icon: Icon(leadingIcon ?? FontAwesomeIcons.bars,
+              color: AppColors.kPrimary),
         ),
         IconButton(
-          onPressed: () {},
-          icon: Icon(FontAwesomeIcons.solidBell, color: AppColors.kPrimary),
+          onPressed: onSuffixTap ?? () {},
+          icon: Icon(suffixIcon ?? FontAwesomeIcons.solidBell,
+              color: AppColors.kPrimary),
         ),
       ],
     );

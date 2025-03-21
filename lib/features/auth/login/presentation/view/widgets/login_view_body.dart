@@ -42,7 +42,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             width: double.infinity,
             fit: BoxFit.fill,
           ),
-
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 34.h),
             child: Form(
@@ -55,7 +54,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     controller: usernameController,
                     hintText: 'username',
                     icon: Icons.person_4_outlined,
-
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter user name';
@@ -69,14 +67,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     isPassword: true,
                     hintText: 'password',
                     icon: Icons.lock_outline_rounded,
-
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter password';
                       }
                       return null;
                     },
-
                     isPasswordVisible: showPass,
                     onTogglePasswordVisibility: () {
                       setState(() {
@@ -97,6 +93,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   CustomButton(
                     text: 'Login',
                     onPressed: () {
+                      context.pushNamed(AppRouter.kRecipeDetailsView);
                       if (formKey.currentState!.validate()) {}
                     },
                   ),
