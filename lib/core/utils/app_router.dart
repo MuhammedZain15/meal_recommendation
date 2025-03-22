@@ -1,6 +1,11 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/services/service_locator.dart';
+import 'package:meal_recommendation/features/auth/login/domain/usecase/login_with_email_usecase.dart';
+import 'package:meal_recommendation/features/auth/login/domain/usecase/login_with_facebook_usecase.dart';
+import 'package:meal_recommendation/features/auth/login/domain/usecase/login_with_google_usecase.dart';
+import 'package:meal_recommendation/features/auth/login/presentation/controller/bloc/login_bloc.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_email_usecase.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_google_usecase.dart';
 import 'package:meal_recommendation/features/home/presentation/view/home_view.dart';
@@ -50,7 +55,15 @@ abstract class AppRouter {
       GoRoute(
         path: kLoginView,
         builder: (context, state) {
-          return const LoginView();
+          return BlocProvider(
+            create:
+              (context) => LoginBloc(
+                loginWithEmailUsecase: sl<LoginWithEmailUsecase>(),
+                loginWithGoogleUseCase: sl<LoginWithGoogleUsecase>(),
+                loginWithFacebookUseCase: sl<LoginWithFacebookUsecase>(),
+              ),
+            child: LoginView(),
+          );
         },
       ),
       GoRoute(
