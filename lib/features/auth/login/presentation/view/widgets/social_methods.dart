@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meal_recommendation/core/utils/app_colors.dart';
 import 'package:meal_recommendation/core/utils/app_images.dart';
 
 class SocialMethods extends StatelessWidget {
@@ -11,11 +12,16 @@ class SocialMethods extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircleAvatar(
-          radius: 33.r,
+          radius: 33,
+          backgroundColor: AppColors.kBlue,
           child: Image.asset(AppImages.facebook),
         ),
         SizedBox(width: 53.w),
-        CircleAvatar(radius: 33.r, child: Image.asset(AppImages.google)),
+        CircleAvatar(
+          radius: 33,
+          backgroundColor: Colors.white,
+          child: Image.asset(AppImages.google),
+        ),
       ],
     );
   }
