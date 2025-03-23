@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:meal_recommendation/core/components/custom_text_field.dart';
 import 'package:meal_recommendation/core/utils/app_images.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:meal_recommendation/core/utils/app_styles.dart';
+import 'package:meal_recommendation/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:meal_recommendation/features/auth/login/presentation/view/widgets/social_methods.dart';
 import '../../../../../../core/components/divider_with_text.dart';
 import '../../../../../../core/components/remember_me_widget.dart';
@@ -93,12 +95,16 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   CustomButton(
                     text: 'Login',
                     onPressed: () {
-                      context.pushNamed(AppRouter.kRecipeDetailsView);
-                      if (formKey.currentState!.validate()) {}
+                      if (formKey.currentState!.validate()) {
+                        context.read<LoginCubit>().login(
+                          usernameController.text,
+                          passowordController.text,
+                        );
+                      }
                     },
                   ),
                   Gap(24),
-                  DividerWithText(text: 'Or login with'),
+                  DividerWithText(text: 'login with'),
                   Gap(45),
                   SocialMethods(),
                   Gap(34),
@@ -119,6 +125,33 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         ),
                       ),
                     ],
+                  ),
+                  BlocListener<LoginCubit, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginError) {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                      if (state is LoginLoaded) {
+                        Navigator.pop(context);
+                        context.pushNamed(AppRouter.kRecipeDetailsView);
+                      }
+                      if (state is LoginLoading) {
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => Center(
+                                child: const CircularProgressIndicator(),
+                              ),
+                        );
+                      }
+                    },
+                    child: SizedBox.shrink(),
                   ),
                 ],
               ),

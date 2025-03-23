@@ -1,0 +1,15 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "dart.flutterSdkPath": ".fvm/versions/3.29.2",
+    "dart.customScripts": {
+      "flutter": "fvm"
+    },
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000
+  }

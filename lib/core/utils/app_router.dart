@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/services/service_locator.dart';
+import 'package:meal_recommendation/features/auth/login/domain/repository/login_repository.dart';
+import 'package:meal_recommendation/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_email_usecase.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_google_usecase.dart';
 import 'package:meal_recommendation/features/home/presentation/view/home_view.dart';
@@ -59,7 +61,10 @@ abstract class AppRouter {
       GoRoute(
         path: kLoginView,
         builder: (context, state) {
-          return const LoginView();
+          return BlocProvider(
+            create: (context) => LoginCubit(sl.get<LoginRepository>()),
+            child: const LoginView(),
+          );
         },
       ),
       GoRoute(
@@ -67,11 +72,12 @@ abstract class AppRouter {
         name: kRegisterView,
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => RegisterBloc(
-              signUpWithEmail: sl<SignUpWithEmailUseCase>(),
-              signInWithGoogle: sl<SignInWithGoogleUseCase>(),
-              signInWithFacebook: sl<SignInWithFacebookUseCase>(),
-            ),
+            create:
+                (context) => RegisterBloc(
+                  signUpWithEmail: sl<SignUpWithEmailUseCase>(),
+                  signInWithGoogle: sl<SignInWithGoogleUseCase>(),
+                  signInWithFacebook: sl<SignInWithFacebookUseCase>(),
+                ),
             child: RegisterView(),
           );
         },
