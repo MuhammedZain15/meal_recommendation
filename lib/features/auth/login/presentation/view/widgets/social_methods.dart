@@ -18,31 +18,13 @@ class SocialMethods extends StatelessWidget {
       children: [
         CircleAvatar(radius: 33.r, child: Image.asset(AppImages.facebook)),
         SizedBox(width: 53.w),
-        BlocListener<LoginCubit, LoginState>(
-          listener: (context, state) {
-            if (state is LoginLoaded) {
-              context.pushNamed(AppRouter.kDetailsView);
-            } else if (state is LoginError) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(state.message)));
-            } else {
-              showDialog(
-                context: context,
-                builder:
-                    (context) =>
-                        Center(child: const CircularProgressIndicator()),
-              );
-            }
+        InkWell(
+          onTap: () {
+            context.read<LoginCubit>().loginWithGoogle();
           },
-          child: InkWell(
-            onTap: () {
-              context.read<LoginCubit>().loginWithGoogle();
-            },
-            child: CircleAvatar(
-              radius: 33.r,
-              child: Image.asset(AppImages.google),
-            ),
+          child: CircleAvatar(
+            radius: 33.r,
+            child: Image.asset(AppImages.google),
           ),
         ),
       ],
