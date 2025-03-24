@@ -3,12 +3,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
 
 class StyledAppBar extends StatelessWidget {
-  const StyledAppBar(
-      {super.key,
-      this.leadingIcon,
-      this.suffixIcon,
-      this.onLeadingTap,
-      this.onSuffixTap});
+  const StyledAppBar({
+    super.key,
+    this.leadingIcon,
+    this.suffixIcon,
+    this.onLeadingTap,
+    this.onSuffixTap,
+  });
+
   final IconData? leadingIcon;
   final IconData? suffixIcon;
   final void Function()? onLeadingTap;
@@ -19,24 +21,22 @@ class StyledAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // زر الـ leading
         IconButton(
-
-          onPressed: () {},
-          icon: const Icon(FontAwesomeIcons.bars, color: AppColors.kPrimary),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(FontAwesomeIcons.solidBell, color: AppColors.kPrimary),
-
           onPressed: onLeadingTap ?? () {},
-          icon: Icon(leadingIcon ?? FontAwesomeIcons.bars,
-              color: AppColors.kPrimary),
+          icon: Icon(
+            leadingIcon ?? FontAwesomeIcons.bars,
+            color: AppColors.kPrimary,
+          ),
         ),
+
+        // زر الـ suffix
         IconButton(
           onPressed: onSuffixTap ?? () {},
-          icon: Icon(suffixIcon ?? FontAwesomeIcons.solidBell,
-              color: AppColors.kPrimary),
-
+          icon: Icon(
+            suffixIcon ?? FontAwesomeIcons.solidBell,
+            color: AppColors.kPrimary,
+          ),
         ),
       ],
     );

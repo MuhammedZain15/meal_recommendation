@@ -26,6 +26,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passowordController = TextEditingController();
+
   @override
   void dispose() {
     usernameController.dispose();
@@ -51,7 +52,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               child: Column(
                 children: [
                   Image.asset(AppImages.logo1),
-                  Gap(70),
+                  const Gap(70),
                   CustomTextFormField(
                     controller: usernameController,
                     hintText: 'username',
@@ -63,7 +64,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       return null;
                     },
                   ),
-                  Gap(22),
+                  const Gap(22),
                   CustomTextFormField(
                     controller: passowordController,
                     isPassword: true,
@@ -82,7 +83,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       });
                     },
                   ),
-                  Gap(15),
+                  const Gap(15),
                   RememberMeWidget(
                     value: rememberMe,
                     onChanged: (value) {
@@ -91,23 +92,23 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       });
                     },
                   ),
-                  Gap(48),
+                  const Gap(48),
                   CustomButton(
                     text: 'Login',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         context.read<LoginCubit>().login(
-                          usernameController.text,
-                          passowordController.text,
+                          usernameController.text.trim(),
+                          passowordController.text.trim(),
                         );
                       }
                     },
                   ),
-                  Gap(24),
-                  DividerWithText(text: 'login with'),
-                  Gap(45),
-                  SocialMethods(),
-                  Gap(34),
+                  const Gap(24),
+                  const DividerWithText(text: 'login with'),
+                  const Gap(45),
+                  const SocialMethods(),
+                  const Gap(34),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -139,19 +140,19 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       }
                       if (state is LoginLoaded) {
                         Navigator.pop(context);
-                        context.pushNamed(AppRouter.kRecipeDetailsView);
+                        context.pushNamed(AppRouter.kFavoriteView);
                       }
                       if (state is LoginLoading) {
                         showDialog(
                           context: context,
                           builder:
-                              (context) => Center(
-                                child: const CircularProgressIndicator(),
+                              (context) => const Center(
+                                child: CircularProgressIndicator(),
                               ),
                         );
                       }
                     },
-                    child: SizedBox.shrink(),
+                    child: const SizedBox.shrink(),
                   ),
                 ],
               ),

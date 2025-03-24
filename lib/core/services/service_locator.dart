@@ -22,10 +22,17 @@ import '../../features/favorite/domain/use_cases/get_favorite_meals_use_case.dar
 final GetIt sl = GetIt.instance;
 
 void serviceLocator() {
+  // Firebase Instances
+  sl.registerLazySingleton<FirebaseAuth>(
+    () => FirebaseAuth.instance,
+  ); // ✅ حل مشكلة عدم تسجيل FirebaseAuth
+  sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
+
+  // Register Feature
   sl.registerLazySingleton<RegisterRemoteDataSource>(
     () => RegisterRemoteDataSourceImpl(
-      auth: FirebaseAuth.instance,
-      firestore: FirebaseFirestore.instance,
+      auth: sl<FirebaseAuth>(), // ✅ استخدام sl<FirebaseAuth>()
+      firestore: sl<FirebaseFirestore>(),
     ),
   );
 
@@ -46,9 +53,6 @@ void serviceLocator() {
   sl.registerLazySingleton<SignInWithFacebookUseCase>(
     () => SignInWithFacebookUseCase(sl<RegisterRepository>()),
   );
-  // Firestore Instance
-  sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
-
 
   // Favorite Feature
   sl.registerLazySingleton<FavoritesRemoteDataSource>(
@@ -61,10 +65,10 @@ void serviceLocator() {
 
   sl.registerLazySingleton<GetFavoriteMeals>(
     () => GetFavoriteMeals(sl<FavoritesRepository>()),
+  );
 
   sl.registerLazySingleton<LoginDataSourceImpl>(() => LoginDataSourceImpl());
   sl.registerLazySingleton<LoginRepository>(
     () => LoginRepositoryImpl(remoteDataSource: sl<LoginDataSourceImpl>()),
-
   );
 }
