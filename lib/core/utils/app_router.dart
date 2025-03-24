@@ -1,9 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/services/service_locator.dart';
+import 'package:meal_recommendation/features/auth/login/domain/repository/login_repository.dart';
+import 'package:meal_recommendation/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_email_usecase.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_google_usecase.dart';
 import 'package:meal_recommendation/features/home/presentation/view/home_view.dart';
+import 'package:meal_recommendation/features/home/presentation/view/recipe_details_view.dart';
 import 'package:meal_recommendation/features/onboarding/onboarding_view.dart';
 import 'package:meal_recommendation/features/splash/splash_view.dart';
 
@@ -24,6 +27,7 @@ abstract class AppRouter {
   static const kRegisterView = '/registerView';
   static const kVerificationView = '/verificationView';
   static const kProfileView = '/profileView';
+  static const kRecipeDetailsView = '/recipeDetailsView';
 
   static final GoRouter router = GoRouter(
     initialLocation: kSplashView,
@@ -40,17 +44,27 @@ abstract class AppRouter {
           return OnboardingView();
         },
       ),
-
       GoRoute(
         path: kHomeView,
+        name: kHomeView,
         builder: (context, state) {
           return const HomeView();
         },
       ),
       GoRoute(
+        path: kRecipeDetailsView,
+        name: kRecipeDetailsView,
+        builder: (context, state) {
+          return const RecipeDetailsView();
+        },
+      ),
+      GoRoute(
         path: kLoginView,
         builder: (context, state) {
-          return const LoginView();
+          return BlocProvider(
+            create: (context) => LoginCubit(sl.get<LoginRepository>()),
+            child: const LoginView(),
+          );
         },
       ),
       GoRoute(
