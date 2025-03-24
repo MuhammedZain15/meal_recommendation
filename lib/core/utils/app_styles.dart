@@ -73,6 +73,11 @@ abstract class AppStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.kPrimary,
   );
+  static TextStyle get font18BoldBlackColor => TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.kBlack,
+  );
   static TextStyle get font20BoldBlackColor => TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,
