@@ -10,6 +10,7 @@ import 'package:meal_recommendation/features/favorite/presentation/controller/fa
 import 'package:meal_recommendation/features/favorite/presentation/pages/favorite_view.dart';
 import 'package:meal_recommendation/features/home/presentation/view/home_view.dart';
 import 'package:meal_recommendation/features/home/presentation/view/recipe_details_view.dart';
+import 'package:meal_recommendation/features/home/presentation/view/see_all_view.dart';
 import 'package:meal_recommendation/features/onboarding/onboarding_view.dart';
 import 'package:meal_recommendation/features/splash/splash_view.dart';
 
@@ -34,7 +35,7 @@ abstract class AppRouter {
   static const kRecipeDetailsView = '/recipeDetailsView';
 
   static final GoRouter router = GoRouter(
-    initialLocation: kDetailsView,
+    initialLocation: kSeeAllView,
     routes: [
       GoRoute(
         path: kSplashView,
@@ -111,6 +112,11 @@ abstract class AppRouter {
         path: kProfileView,
         builder: (context, state) {
           return const ProfileView();
+        },
+      ),GoRoute(
+        path: kSeeAllView,
+        builder: (context, state) {
+          return const SeeAllView();
         },
       ),
     ],
