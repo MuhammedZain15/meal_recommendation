@@ -20,6 +20,14 @@ class StyledAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
+
+          onPressed: () {},
+          icon: const Icon(FontAwesomeIcons.bars, color: AppColors.kPrimary),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(FontAwesomeIcons.solidBell, color: AppColors.kPrimary),
+
           onPressed: onLeadingTap ?? () {},
           icon: Icon(leadingIcon ?? FontAwesomeIcons.bars,
               color: AppColors.kPrimary),
@@ -28,6 +36,7 @@ class StyledAppBar extends StatelessWidget {
           onPressed: onSuffixTap ?? () {},
           icon: Icon(suffixIcon ?? FontAwesomeIcons.solidBell,
               color: AppColors.kPrimary),
+
         ),
       ],
     );
