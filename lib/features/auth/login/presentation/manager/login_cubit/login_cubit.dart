@@ -14,8 +14,8 @@ class LoginCubit extends Cubit<LoginState> {
       password,
     );
     result.fold(
-      (failure) => emit(LoginError(failure.message)),
-      (user) => emit(LoginLoaded()),
+          (failure) => emit(LoginError(failure.message)),
+          (user) => emit(LoginLoaded()),
     );
   }
 
@@ -23,8 +23,8 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
     var result = await loginRepository.signInWithGoogle();
     result.fold(
-      (failure) => emit(LoginError(failure.message)),
-      (user) => emit(LoginLoaded()),
+          (failure) => emit(LoginError(failure.message)),
+          (user) => emit(LoginLoaded()),
     );
   }
 }

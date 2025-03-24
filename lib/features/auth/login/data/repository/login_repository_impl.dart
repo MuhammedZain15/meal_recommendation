@@ -16,9 +16,9 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl({required this.remoteDataSource});
   @override
   Future<Either<Failure, User>> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+      String email,
+      String password,
+      ) async {
     try {
       final user = await remoteDataSource.loginWithEmailAndPassword(
         email,

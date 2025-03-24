@@ -34,7 +34,7 @@ abstract class AppRouter {
   static const kRecipeDetailsView = '/recipeDetailsView';
 
   static final GoRouter router = GoRouter(
-    initialLocation: kFavoriteView,
+    initialLocation: kSplashView,
     routes: [
       GoRoute(
         path: kSplashView,
@@ -93,7 +93,8 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: AppRouter.kFavoriteView,
+        path: kFavoriteView,
+        name: kFavoriteView,
         builder: (context, state) {
           return BlocProvider(
             create: (context) => FavoritesCubit(sl<GetFavoriteMeals>())..fetchFavorites(),
