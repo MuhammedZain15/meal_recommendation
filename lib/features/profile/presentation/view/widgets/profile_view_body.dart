@@ -43,18 +43,21 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       child: Column(
         children: [
-          StyledAppBar(),
-          SizedBox(height: 12),
+          const Padding(
+            padding: EdgeInsets.only(top: 30.0),
+            child: StyledAppBar(),
+          ),
+          const SizedBox(height: 12),
 
-          StyledProfileAvatar(),
-          SizedBox(height: 30),
+          const StyledProfileAvatar(),
+          const SizedBox(height: 30),
           ProfileFormSection(
             nameController: _nameController,
             emailController: _emailController,
             phoneController: _phoneController,
             passwordController: _passwordController,
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: StyledElevatedButton(

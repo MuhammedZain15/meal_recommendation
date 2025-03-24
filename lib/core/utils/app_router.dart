@@ -34,12 +34,17 @@ abstract class AppRouter {
   static const kRecipeDetailsView = '/recipeDetailsView';
 
   static final GoRouter router = GoRouter(
-    initialLocation: kSplashView,
+    initialLocation: kDetailsView,
     routes: [
       GoRoute(
         path: kSplashView,
         builder: (context, state) {
           return const SplashView();
+        },
+      ), GoRoute(
+        path: kDetailsView,
+        builder: (context, state) {
+          return const RecipeDetailsView();
         },
       ),
       GoRoute(
