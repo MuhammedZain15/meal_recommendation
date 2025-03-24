@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+
 import 'package:meal_recommendation/features/favorite/data/data_sources/favorites_remote_data_source.dart';
 import 'package:meal_recommendation/features/favorite/data/repositories/favorites_repository_impl.dart';
 import 'package:meal_recommendation/features/favorite/domain/repositories/favorites_repository.dart';
+
+import 'package:meal_recommendation/features/auth/login/data/data_source/login_datasource.dart';
+import 'package:meal_recommendation/features/auth/login/data/repository/login_repository_impl.dart';
+import 'package:meal_recommendation/features/auth/login/domain/repository/login_repository.dart';
 
 import '../../features/auth/register/data/data_source/register_datasource.dart';
 import '../../features/auth/register/data/repository/register_repository_impl.dart';
@@ -44,6 +49,7 @@ void serviceLocator() {
   // Firestore Instance
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
 
+
   // Favorite Feature
   sl.registerLazySingleton<FavoritesRemoteDataSource>(
     () => FavoritesRemoteDataSourceImpl(sl<FirebaseFirestore>()),
@@ -55,5 +61,10 @@ void serviceLocator() {
 
   sl.registerLazySingleton<GetFavoriteMeals>(
     () => GetFavoriteMeals(sl<FavoritesRepository>()),
+
+  sl.registerLazySingleton<LoginDataSourceImpl>(() => LoginDataSourceImpl());
+  sl.registerLazySingleton<LoginRepository>(
+    () => LoginRepositoryImpl(remoteDataSource: sl<LoginDataSourceImpl>()),
+
   );
 }
