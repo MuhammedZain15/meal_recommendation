@@ -10,6 +10,8 @@ import 'package:meal_recommendation/features/auth/login/data/data_source/login_d
 import 'package:meal_recommendation/features/auth/login/data/repository/login_repository_impl.dart';
 import 'package:meal_recommendation/features/auth/login/domain/repository/login_repository.dart';
 
+import '../../features/auth/login/domain/usecase/login_with_email_and_password_usecase.dart';
+import '../../features/auth/login/domain/usecase/login_with_google_usecase.dart';
 import '../../features/auth/register/data/data_source/register_datasource.dart';
 import '../../features/auth/register/data/repository/register_repository_impl.dart';
 import '../../features/auth/register/domain/repository/register_repository.dart';
@@ -18,22 +20,20 @@ import '../../features/auth/register/domain/usecase/signup_with_facebook_usecase
 import '../../features/auth/register/domain/usecase/signup_with_google_usecase.dart';
 import '../../features/favorite/domain/use_cases/get_favorite_meals_use_case.dart'
     show GetFavoriteMeals;
+import 'firebase_utils.dart';
 
 final GetIt sl = GetIt.instance;
 
 void serviceLocator() {
   // Firebase Instances
-  sl.registerLazySingleton<FirebaseAuth>(
-    () => FirebaseAuth.instance,
-  ); // ✅ حل مشكلة عدم تسجيل FirebaseAuth
+  sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
 
   // Register Feature
+  sl.registerLazySingleton<FirebaseService>(() => FirebaseService());
+
   sl.registerLazySingleton<RegisterRemoteDataSource>(
-    () => RegisterRemoteDataSourceImpl(
-      auth: sl<FirebaseAuth>(), // ✅ استخدام sl<FirebaseAuth>()
-      firestore: sl<FirebaseFirestore>(),
-    ),
+    () => RegisterRemoteDataSourceImpl(firebaseService: sl<FirebaseService>()),
   );
 
   sl.registerLazySingleton<RegisterRepository>(
@@ -67,8 +67,21 @@ void serviceLocator() {
     () => GetFavoriteMeals(sl<FavoritesRepository>()),
   );
 
-  sl.registerLazySingleton<LoginDataSourceImpl>(() => LoginDataSourceImpl());
+  sl.registerLazySingleton<LoginDataSourceImpl>(
+    () => LoginDataSourceImpl(firebaseService: sl<FirebaseService>()),
+  );
+
+  sl.registerLazySingleton<LoginDataSource>(() => sl<LoginDataSourceImpl>());
+
   sl.registerLazySingleton<LoginRepository>(
     () => LoginRepositoryImpl(remoteDataSource: sl<LoginDataSourceImpl>()),
+  );
+
+  sl.registerLazySingleton<LoginWithEmailAndPasswordUseCase>(
+    () => LoginWithEmailAndPasswordUseCase(sl<LoginRepository>()),
+  );
+
+  sl.registerLazySingleton<LoginWithGoogleUseCase>(
+    () => LoginWithGoogleUseCase(sl<LoginRepository>()),
   );
 }

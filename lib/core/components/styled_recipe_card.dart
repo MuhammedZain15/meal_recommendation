@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_recommendation/core/utils/app_strings.dart';
 
 import '../utils/app_styles.dart';
@@ -37,7 +38,7 @@ class StyledRecipeCard extends StatelessWidget {
             Card(
               elevation: 10,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(5.r),
               ),
               child: Row(
                 children: [
@@ -51,7 +52,7 @@ class StyledRecipeCard extends StatelessWidget {
 
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: EdgeInsets.only(top: 8.0.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -71,10 +72,10 @@ class StyledRecipeCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Row(
                             children: List.generate(rating, (index) {
-                              return Icon(
+                              return const Icon(
                                 Icons.star,
                                 color: Colors.amber,
                                 size: 20,
@@ -100,19 +101,18 @@ class StyledRecipeCard extends StatelessWidget {
   }
 }
 
-
 //example
 ///
 ///
-///  
-/// 
+///
+///
 /// RecipeCard(
-        //   image: AppImages.food1,
-        //   title: 'Grilled Chicken',
-        //   subtitle: 'With Avocado',
-        //   ingredientsCount: 5,
-        //   time: 20,
-        //   rating: 4,
-        //   isFavorite: true,
-        // ),
-  ///
+//   image: AppImages.food1,
+//   title: 'Grilled Chicken',
+//   subtitle: 'With Avocado',
+//   ingredientsCount: 5,
+//   time: 20,
+//   rating: 4,
+//   isFavorite: true,
+// ),
+///

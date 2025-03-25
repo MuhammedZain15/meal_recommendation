@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/services/service_locator.dart';
 import 'package:meal_recommendation/features/auth/login/domain/repository/login_repository.dart';
+import 'package:meal_recommendation/features/auth/login/domain/usecase/login_with_email_and_password_usecase.dart';
 import 'package:meal_recommendation/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_email_usecase.dart';
 import 'package:meal_recommendation/features/auth/register/domain/usecase/signup_with_google_usecase.dart';
@@ -14,11 +15,11 @@ import 'package:meal_recommendation/features/home/presentation/view/see_all_view
 import 'package:meal_recommendation/features/onboarding/onboarding_view.dart';
 import 'package:meal_recommendation/features/splash/splash_view.dart';
 
+import '../../features/auth/login/domain/usecase/login_with_google_usecase.dart';
 import '../../features/auth/login/presentation/view/login_view.dart';
 import '../../features/auth/register/domain/usecase/signup_with_facebook_usecase.dart';
 import '../../features/auth/register/presentation/controller/register_bloc.dart';
 import '../../features/auth/register/presentation/view/register_view.dart';
-import '../../features/auth/verification/presentation/view/verification_view.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 
 abstract class AppRouter {
@@ -29,20 +30,20 @@ abstract class AppRouter {
   static const kDetailsView = '/detailsView';
   static const kLoginView = '/loginView';
   static const kRegisterView = '/registerView';
-  static const kVerificationView = '/verificationView';
   static const kProfileView = '/profileView';
   static const kFavoriteView = '/favoriteView';
   static const kRecipeDetailsView = '/recipeDetailsView';
 
   static final GoRouter router = GoRouter(
-    initialLocation: kSeeAllView,
+    initialLocation: kLoginView,
     routes: [
       GoRoute(
         path: kSplashView,
         builder: (context, state) {
           return const SplashView();
         },
-      ), GoRoute(
+      ),
+      GoRoute(
         path: kDetailsView,
         builder: (context, state) {
           return const RecipeDetailsView();
@@ -72,11 +73,17 @@ abstract class AppRouter {
         path: kLoginView,
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => LoginCubit(sl.get<LoginRepository>()),
+            create:
+                (context) => LoginCubit(
+                  loginWithEmailAndPasswordUseCase:
+                      sl<LoginWithEmailAndPasswordUseCase>(),
+                  loginWithGoogleUseCase: sl<LoginWithGoogleUseCase>(),
+                ),
             child: const LoginView(),
           );
         },
       ),
+
       GoRoute(
         path: kRegisterView,
         name: kRegisterView,
@@ -93,17 +100,13 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: kVerificationView,
-        builder: (context, state) {
-          return const VerificationView();
-        },
-      ),
-      GoRoute(
         path: kFavoriteView,
         name: kFavoriteView,
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => FavoritesCubit(sl<GetFavoriteMeals>())..fetchFavorites(),
+            create:
+                (context) =>
+                    FavoritesCubit(sl<GetFavoriteMeals>())..fetchFavorites(),
             child: const FavoriteView(),
           );
         },
@@ -113,7 +116,8 @@ abstract class AppRouter {
         builder: (context, state) {
           return const ProfileView();
         },
-      ),GoRoute(
+      ),
+      GoRoute(
         path: kSeeAllView,
         builder: (context, state) {
           return const SeeAllView();

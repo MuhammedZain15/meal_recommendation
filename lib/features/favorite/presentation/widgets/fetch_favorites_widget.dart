@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_recommendation/core/components/styled_recipe_card.dart';
 import 'package:meal_recommendation/features/favorite/presentation/controller/favorites_bloc.dart';
 import 'package:meal_recommendation/features/favorite/presentation/controller/favorites_state.dart';
 
 class FetchFavoritesWidget extends StatelessWidget {
-  const FetchFavoritesWidget({
-    super.key,
-  });
+  const FetchFavoritesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class FetchFavoritesWidget extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (state is FavoritesSuccessState) {
           return ListView.separated(
-            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            separatorBuilder: (context, index) => SizedBox(height: 10.h),
             itemCount: state.meals.length,
             itemBuilder: (context, index) {
               final meal = state.meals[index];

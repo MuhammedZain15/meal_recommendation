@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_recommendation/core/components/styled_app_bar.dart';
 import 'package:meal_recommendation/core/components/styled_recipe_card.dart';
 import 'package:meal_recommendation/core/services/service_locator.dart';
@@ -18,29 +19,27 @@ class FavoriteViewBody extends StatelessWidget {
           builder: (context, constraints) {
             return Scaffold(
               body: Padding(
-                padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
+                padding: EdgeInsets.only(top: 20.0.h, left: 10.w, right: 10.w),
                 child: Column(
                   children: [
-                    const SizedBox(height: 60, child: StyledAppBar()),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 60.h, child: const StyledAppBar()),
+                    SizedBox(height: 20.h),
                     Expanded(
                       child: ListView.separated(
-                        separatorBuilder:(context, index) =>  const SizedBox(
-                          height: 10,
-                        ),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(height: 10),
                         itemCount: 5,
-                        itemBuilder:(context, index) =>  StyledRecipeCard(
-                          title: "title",
-                          subtitle: "subtitle",
-                          image: AppImages.food2,
-                          rating: 5,
-                          ingredientsCount: 3,
-                          isFavorite: true,
-                          time: 15,
-                          onTap: () {},
-                        ),
+                        itemBuilder:
+                            (context, index) => StyledRecipeCard(
+                              title: "title",
+                              subtitle: "subtitle",
+                              image: AppImages.food2,
+                              rating: 5,
+                              ingredientsCount: 3,
+                              isFavorite: true,
+                              time: 15,
+                              onTap: () {},
+                            ),
                       ),
                       //FetchFavoritesWidget(),
                     ),

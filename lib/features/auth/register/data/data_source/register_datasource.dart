@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
+import '../../../../../core/services/firebase_utils.dart';
 import '../../../shared/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class RegisterRemoteDataSource {
   Future<UserModel> signUpWithEmail({
@@ -12,15 +9,14 @@ abstract class RegisterRemoteDataSource {
     required String username,
     required String phone,
   });
+
   Future<UserModel> signInWithGoogle();
-  Future<UserModel> signInWithFacebook();
 }
 
 class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
-  final FirebaseAuth auth;
-  final FirebaseFirestore firestore;
+  final FirebaseService firebaseService;
 
-  RegisterRemoteDataSourceImpl({required this.auth, required this.firestore});
+  RegisterRemoteDataSourceImpl({required this.firebaseService});
 
   @override
   Future<UserModel> signUpWithEmail({
@@ -30,11 +26,7 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
     required String phone,
   }) async {
     try {
-      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      User? user = userCredential.user;
+      User? user = await firebaseService.signUpWithEmail(email, password);
       if (user == null) throw Exception("User creation failed");
 
       await user.updateDisplayName(username);
@@ -46,7 +38,7 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
         phone: phone,
         password: password,
       );
-      await firestore.collection('users').doc(user.uid).set(userModel.toJson());
+      await firebaseService.saveUserData(user.uid, userModel.toJson());
 
       return userModel;
     } catch (e) {
@@ -56,47 +48,14 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
 
   @override
   Future<UserModel> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    if (googleUser == null) throw Exception("Google Sign-In failed");
-
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    final UserCredential userCredential = await auth.signInWithCredential(
-      credential,
-    );
-    return UserModel(
-      uid: userCredential.user!.uid,
-      username: userCredential.user!.displayName ?? "",
-      email: userCredential.user!.email!,
-      phone: userCredential.user!.phoneNumber ?? "",
-      password: "",
-    );
-  }
-
-  @override
-  Future<UserModel> signInWithFacebook() async {
-    final LoginResult result = await FacebookAuth.instance.login();
-    if (result.status != LoginStatus.success) {
-      throw Exception("Facebook login failed");
-    }
-
-    final AuthCredential credential = FacebookAuthProvider.credential(
-      result.accessToken!.tokenString,
-    );
-    final UserCredential userCredential = await auth.signInWithCredential(
-      credential,
-    );
+    final user = await firebaseService.signInWithGoogle();
+    if (user == null) throw Exception("Google Sign-In failed");
 
     return UserModel(
-      uid: userCredential.user!.uid,
-      username: userCredential.user!.displayName ?? "",
-      email: userCredential.user!.email!,
-      phone: userCredential.user!.phoneNumber ?? "",
+      uid: user.uid,
+      username: user.displayName ?? "",
+      email: user.email!,
+      phone: user.phoneNumber ?? "",
       password: "",
     );
   }

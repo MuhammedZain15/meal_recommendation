@@ -1,30 +1,39 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meal_recommendation/features/auth/login/domain/repository/login_repository.dart';
+import 'package:meal_recommendation/core/services/service_locator.dart';
+import 'package:meal_recommendation/features/auth/login/domain/usecase/login_with_email_and_password_usecase.dart';
+
+import '../../../domain/usecase/login_with_google_usecase.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this.loginRepository) : super(LoginInitial());
-  final LoginRepository loginRepository;
+  final LoginWithEmailAndPasswordUseCase loginWithEmailAndPasswordUseCase;
+  final LoginWithGoogleUseCase loginWithGoogleUseCase;
+
+  LoginCubit({required loginWithEmailAndPasswordUseCase, required loginWithGoogleUseCase})
+    : loginWithEmailAndPasswordUseCase = sl<LoginWithEmailAndPasswordUseCase>(),
+      loginWithGoogleUseCase = sl<LoginWithGoogleUseCase>(),
+      super(LoginInitial());
+
   Future<void> login(String email, String password) async {
     emit(LoginLoading());
-    var result = await loginRepository.signInWithEmailAndPassword(
+    var result = await loginWithEmailAndPasswordUseCase.execute(
       email,
       password,
     );
     result.fold(
-          (failure) => emit(LoginError(failure.message)),
-          (user) => emit(LoginLoaded()),
+      (failure) => emit(LoginError(failure.message)),
+      (user) => emit(LoginLoaded()),
     );
   }
 
   Future<void> loginWithGoogle() async {
     emit(LoginLoading());
-    var result = await loginRepository.signInWithGoogle();
+    var result = await loginWithGoogleUseCase.execute();
     result.fold(
-          (failure) => emit(LoginError(failure.message)),
-          (user) => emit(LoginLoaded()),
+      (failure) => emit(LoginError(failure.message)),
+      (user) => emit(LoginLoaded()),
     );
   }
 }
