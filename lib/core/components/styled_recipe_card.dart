@@ -32,7 +32,7 @@ class StyledRecipeCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: 114,
+        height: 140,
         child: Stack(
           children: [
             Card(
