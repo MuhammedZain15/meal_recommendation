@@ -5,7 +5,7 @@ import '../../../auth/shared/model/user_model.dart';
 import '../../domain/repository/profile_repository.dart';
 import '../data_source/profile_remote_data_source.dart';
 
-class ProfileRepositoryImpl implements ProflieRepository {
+class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileRemoteDataSource remoteDataSource;
 
   ProfileRepositoryImpl(this.remoteDataSource);

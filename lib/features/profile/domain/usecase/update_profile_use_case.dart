@@ -5,7 +5,7 @@ import '../../../auth/shared/model/user_model.dart';
 import '../repository/profile_repository.dart';
 
 class UpdateProfileUseCase {
-  final ProflieRepository repository;
+  final ProfileRepository repository;
 
   UpdateProfileUseCase(this.repository);
 
