@@ -1,6 +1,11 @@
-import 'package:flutter/material.dart';
-import '../../../../core/utils/app_colors.dart';
+// lib/features/home/presentation/view/see_all_view.dart
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:meal_recommendation/core/components/styled_app_bar.dart';
+import 'package:meal_recommendation/core/services/service_locator.dart';
+import '../logic/recipe_cubit.dart';
 import 'widgets/see_all_view_body.dart';
 
 class SeeAllView extends StatelessWidget {
@@ -8,8 +13,28 @@ class SeeAllView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(backgroundColor: AppColors.kGrey, body: SeeAllViewBody()),
+    return BlocProvider(
+      create:
+          (context) =>
+              sl<RecipeCubit>()
+                ..loadTrendingRecipes()
+                ..loadRecommendedRecipes(),
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                StyledAppBar(
+                  onLeadingTap: () => context.pop(),
+                  leadingIcon: Icons.arrow_back,
+                ),
+                const Expanded(child: SeeAllViewBody()),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

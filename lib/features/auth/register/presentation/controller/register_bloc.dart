@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../../home/data/repo/recipe_initializer.dart';
 import '../../domain/usecase/signup_with_facebook_usecase.dart';
 import '../../domain/usecase/signup_with_google_usecase.dart';
 import '../../domain/usecase/signup_with_email_usecase.dart';
@@ -25,6 +27,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           username: event.username,
           phone: event.phone,
         );
+
+        // Initialize recipes for the user
+        try {
+          await RecipeInitializer.initializeRecipesIfNeeded(
+            FirebaseFirestore.instance,
+          );
+        } catch (e) {
+          print('Error initializing recipes: $e');
+          // Continue with registration even if recipe initialization fails
+        }
+
         emit(RegisterSuccess(user));
       } catch (e) {
         emit(RegisterFailure(e.toString()));
@@ -35,6 +48,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(RegisterLoading());
       try {
         final user = await signInWithGoogle.execute();
+
+        // Initialize recipes for the user
+        try {
+          await RecipeInitializer.initializeRecipesIfNeeded(
+            FirebaseFirestore.instance,
+          );
+        } catch (e) {
+          print('Error initializing recipes: $e');
+          // Continue with registration even if recipe initialization fails
+        }
+
         emit(RegisterSuccess(user));
       } catch (e) {
         emit(RegisterFailure(e.toString()));
@@ -45,6 +69,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(RegisterLoading());
       try {
         final user = await signInWithFacebook.execute();
+
+        // Initialize recipes for the user
+        try {
+          await RecipeInitializer.initializeRecipesIfNeeded(
+            FirebaseFirestore.instance,
+          );
+        } catch (e) {
+          print('Error initializing recipes: $e');
+          // Continue with registration even if recipe initialization fails
+        }
+
         emit(RegisterSuccess(user));
       } catch (e) {
         emit(RegisterFailure(e.toString()));

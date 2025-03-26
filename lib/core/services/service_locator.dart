@@ -18,6 +18,10 @@ import '../../features/favorite/data/repositories/favorites_repository_impl.dart
 import '../../features/favorite/domain/repositories/favorites_repository.dart';
 import '../../features/favorite/domain/use_cases/get_favorite_meals_use_case.dart'
     show GetFavoriteMeals;
+import '../../features/home/data/datasources/recipe_datasource.dart';
+import '../../features/home/data/repo/recipe_repository_impl.dart';
+import '../../features/home/domain/repos/recipe_repository.dart';
+import '../../features/home/presentation/logic/recipe_cubit.dart';
 import '../../features/profile/data/data_source/profile_remote_data_source.dart';
 import '../../features/profile/data/repository/profile_repository_impl.dart';
 import '../../features/profile/domain/repository/profile_repository.dart';
@@ -32,9 +36,24 @@ void serviceLocator() {
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
 
-  // Register Feature
+  // Firebase Service
   sl.registerLazySingleton<FirebaseService>(() => FirebaseService());
 
+  // Recipe Feature
+  sl.registerLazySingleton<RecipeDataSource>(
+    () => RecipeDataSourceImpl(
+      firestore: sl<FirebaseFirestore>(),
+      auth: sl<FirebaseAuth>(),
+    ),
+  );
+
+  sl.registerLazySingleton<RecipeRepository>(
+    () => RecipeRepositoryImpl(dataSource: sl<RecipeDataSource>()),
+  );
+
+  sl.registerFactory(() => RecipeCubit(repository: sl<RecipeRepository>()));
+
+  // Register Feature
   sl.registerLazySingleton<RegisterRemoteDataSource>(
     () => RegisterRemoteDataSourceImpl(firebaseService: sl<FirebaseService>()),
   );
@@ -70,6 +89,7 @@ void serviceLocator() {
     () => GetFavoriteMeals(sl<FavoritesRepository>()),
   );
 
+  // Login Feature
   sl.registerLazySingleton<LoginDataSourceImpl>(
     () => LoginDataSourceImpl(sl<FirebaseService>()),
   );

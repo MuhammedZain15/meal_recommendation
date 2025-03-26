@@ -1,3 +1,5 @@
+// lib/core/utils/app_router.dart
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,6 +15,7 @@ import '../../features/auth/register/presentation/view/register_view.dart';
 import '../../features/favorite/domain/use_cases/get_favorite_meals_use_case.dart';
 import '../../features/favorite/presentation/controller/favorites_bloc.dart';
 import '../../features/favorite/presentation/pages/favorite_view.dart';
+import '../../features/home/data/models/recipe_model.dart';
 import '../../features/home/presentation/view/home_view.dart';
 import '../../features/home/presentation/view/recipe_details_view.dart';
 import '../../features/home/presentation/view/see_all_view.dart';
@@ -62,12 +65,6 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: kDetailsView,
-        builder: (context, state) {
-          return const RecipeDetailsView();
-        },
-      ),
-      GoRoute(
         path: kOnboardingView,
         builder: (context, state) {
           return const OnboardingView();
@@ -84,7 +81,8 @@ abstract class AppRouter {
         path: kRecipeDetailsView,
         name: kRecipeDetailsView,
         builder: (context, state) {
-          return const RecipeDetailsView();
+          final recipe = state.extra as RecipeModel;
+          return RecipeDetailsView(recipe: recipe);
         },
       ),
       GoRoute(
@@ -101,7 +99,6 @@ abstract class AppRouter {
           );
         },
       ),
-
       GoRoute(
         path: kRegisterView,
         name: kRegisterView,

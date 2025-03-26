@@ -14,11 +14,7 @@ abstract class LoginDataSource {
 class LoginDataSourceImpl implements LoginDataSource {
   final FirebaseService firebaseService;
 
-
-  LoginDataSourceImpl(
-   
-     this.firebaseService,
-  );
+  LoginDataSourceImpl(this.firebaseService);
 
   @override
   Future<User> loginWithEmailAndPassword(String email, String password) async {

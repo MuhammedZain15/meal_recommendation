@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../utils/app_strings.dart';
 import '../utils/app_styles.dart';
 import 'is_favorite_widget.dart';
@@ -15,6 +14,7 @@ class StyledRecipeCard extends StatelessWidget {
     required this.time,
     required this.rating,
     required this.isFavorite,
+    required this.recipeId,
     this.onTap,
   });
 
@@ -25,6 +25,7 @@ class StyledRecipeCard extends StatelessWidget {
   final int time;
   final int rating;
   final bool isFavorite;
+  final String recipeId;
   final void Function()? onTap;
 
   @override
@@ -32,7 +33,7 @@ class StyledRecipeCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: 140,
+        height: 140.h,
         child: Stack(
           children: [
             Card(
@@ -60,12 +61,12 @@ class StyledRecipeCard extends StatelessWidget {
                           Text(subtitle, style: AppStyles.font20BoldBlackColor),
 
                           Row(
-                            spacing: 10,
                             children: [
                               Text(
                                 '$ingredientsCount ${AppStrings.kIngredients}',
                                 style: AppStyles.font15Ww500DarkGreyColor,
                               ),
+                              const SizedBox(width: 10),
                               Text(
                                 '$time${AppStrings.kMin}',
                                 style: AppStyles.font15Ww500PrimaryColor,
@@ -92,7 +93,10 @@ class StyledRecipeCard extends StatelessWidget {
             Positioned(
               right: 0,
               top: 0,
-              child: IsFavoriteWidget(isFavorite: isFavorite),
+              child: IsFavoriteWidget(
+                isFavorite: isFavorite,
+                recipeId: recipeId,
+              ),
             ),
           ],
         ),
@@ -100,19 +104,3 @@ class StyledRecipeCard extends StatelessWidget {
     );
   }
 }
-
-//example
-///
-///
-///
-///
-/// RecipeCard(
-//   image: AppImages.food1,
-//   title: 'Grilled Chicken',
-//   subtitle: 'With Avocado',
-//   ingredientsCount: 5,
-//   time: 20,
-//   rating: 4,
-//   isFavorite: true,
-// ),
-///

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/components/styled_recipe_card.dart';
+import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:meal_recommendation/features/favorite/presentation/controller/favorites_bloc.dart';
 import 'package:meal_recommendation/features/favorite/presentation/controller/favorites_state.dart';
 
@@ -28,7 +30,10 @@ class FetchFavoritesWidget extends StatelessWidget {
                 time: meal.time,
                 rating: meal.rating,
                 isFavorite: meal.isFavorite,
-                onTap: () {},
+                recipeId: meal.id, // Added recipeId
+                onTap: () {
+                  context.push(AppRouter.kRecipeDetailsView);
+                },
               );
             },
           );
