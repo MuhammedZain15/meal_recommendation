@@ -18,6 +18,11 @@ import '../../features/favorite/data/repositories/favorites_repository_impl.dart
 import '../../features/favorite/domain/repositories/favorites_repository.dart';
 import '../../features/favorite/domain/use_cases/get_favorite_meals_use_case.dart'
     show GetFavoriteMeals;
+import '../../features/profile/data/data_source/profile_remote_data_source.dart';
+import '../../features/profile/data/repository/profile_repository_impl.dart';
+import '../../features/profile/domain/repository/profile_repository.dart';
+import '../../features/profile/domain/usecase/get_profile_use_case.dart';
+import '../../features/profile/domain/usecase/update_profile_use_case.dart';
 import 'firebase_utils.dart';
 
 final GetIt sl = GetIt.instance;
@@ -26,7 +31,6 @@ void serviceLocator() {
   // Firebase Instances
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
- 
 
   // Register Feature
   sl.registerLazySingleton<FirebaseService>(() => FirebaseService());
@@ -67,9 +71,7 @@ void serviceLocator() {
   );
 
   sl.registerLazySingleton<LoginDataSourceImpl>(
-    () => LoginDataSourceImpl(
-      sl<FirebaseService>(),
-    ),
+    () => LoginDataSourceImpl(sl<FirebaseService>()),
   );
 
   sl.registerLazySingleton<LoginDataSource>(() => sl<LoginDataSourceImpl>());
@@ -84,5 +86,22 @@ void serviceLocator() {
 
   sl.registerLazySingleton<LoginWithGoogleUseCase>(
     () => LoginWithGoogleUseCase(sl<LoginRepository>()),
+  );
+
+  // Profile Feature
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(sl<FirebaseFirestore>()),
+  );
+
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(sl<ProfileRemoteDataSource>()),
+  );
+
+  sl.registerLazySingleton<GetProfileUseCase>(
+    () => GetProfileUseCase(sl<ProfileRepository>()),
+  );
+
+  sl.registerLazySingleton<UpdateProfileUseCase>(
+    () => UpdateProfileUseCase(sl<ProfileRepository>()),
   );
 }
