@@ -27,7 +27,7 @@ class StyeldSeeAllCard extends StatelessWidget {
                     right: 0,
                     child: IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.favorite_border,color: AppColors.kPrimary,),
+                      icon: const Icon(Icons.favorite_border,color: AppColors.kPrimary,),
                     ),
                   ),
                   Column(
@@ -52,7 +52,7 @@ class StyeldSeeAllCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
+                          const Row(
                             children: [
                               Icon(Icons.star, color: Colors.amber),
                               Icon(Icons.star, color: Colors.amber),

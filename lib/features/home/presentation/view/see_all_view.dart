@@ -8,12 +8,8 @@ class SeeAllView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.kGrey,
-        
-        body: const SeeAllViewBody(),
-      ),
+    return const SafeArea(
+      child: Scaffold(backgroundColor: AppColors.kGrey, body: SeeAllViewBody()),
     );
   }
 }

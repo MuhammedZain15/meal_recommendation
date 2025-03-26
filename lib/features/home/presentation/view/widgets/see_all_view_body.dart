@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recommendation/core/components/styeld_see_all_card.dart';
-import 'package:meal_recommendation/core/components/styled_app_bar.dart';
-import 'package:meal_recommendation/core/components/styled_recipe_list_view_item.dart';
-import 'package:meal_recommendation/core/utils/app_styles.dart';
+
+import '../../../../../core/components/styeld_see_all_card.dart';
+import '../../../../../core/components/styled_app_bar.dart';
+import '../../../../../core/components/styled_recipe_list_view_item.dart';
+import '../../../../../core/utils/app_styles.dart';
 
 class SeeAllViewBody extends StatelessWidget {
   const SeeAllViewBody({super.key});
@@ -13,7 +14,7 @@ class SeeAllViewBody extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Padding(padding: const EdgeInsets.all(8.0), child: StyledAppBar()),
+          const Padding(padding: EdgeInsets.all(8.0), child: StyledAppBar()),
           Row(
             children: [
               Padding(
@@ -25,7 +26,7 @@ class SeeAllViewBody extends StatelessWidget {
               ),
             ],
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.27,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -43,12 +44,12 @@ class SeeAllViewBody extends StatelessWidget {
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: 10);
+                  return const SizedBox(width: 10);
                 },
               ),
             ),
           ),
-      
+
           Row(
             children: [
               Padding(
@@ -60,7 +61,7 @@ class SeeAllViewBody extends StatelessWidget {
               ),
             ],
           ),
-           Expanded(
+          Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.separated(
@@ -76,7 +77,7 @@ class SeeAllViewBody extends StatelessWidget {
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: 10);
+                  return const SizedBox(width: 10);
                 },
               ),
             ),

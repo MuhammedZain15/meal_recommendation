@@ -20,7 +20,7 @@ class StyledElevatedButton extends StatelessWidget {
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           ),
-          backgroundColor: WidgetStatePropertyAll(AppColors.kPrimary),
+          backgroundColor: const WidgetStatePropertyAll(AppColors.kPrimary),
         ),
         child: Text(text, style: AppStyles.font22W700WhiteColor),
       ),

@@ -45,7 +45,7 @@ class NavigationButton extends StatelessWidget {
         }
       },
       child: Text(
-        style: TextStyle(
+        style: const TextStyle(
           color: AppColors.kPrimary,
           fontWeight: FontWeight.w700,
         ),

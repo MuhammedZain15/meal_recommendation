@@ -23,7 +23,7 @@ class OnboardingPageView extends StatelessWidget {
         children: [
           Container(
             height: 350,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.kPrimary,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(150),
@@ -51,7 +51,7 @@ class OnboardingPageView extends StatelessWidget {
 
           Column(
             children: [
-              SizedBox(height: 200),
+              const SizedBox(height: 200),
               Container(
                 height: 260,
                 decoration: BoxDecoration(
@@ -59,13 +59,13 @@ class OnboardingPageView extends StatelessWidget {
                   border: Border.all(),
                 ),
               ),
-              SizedBox(height: 13),
+              const SizedBox(height: 13),
               Text(
                 title,
                 style: AppStyles.font18BoldPrimaryColor,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
