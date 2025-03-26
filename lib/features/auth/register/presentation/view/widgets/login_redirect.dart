@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_recommendation/core/utils/app_router.dart';
-import 'package:meal_recommendation/core/utils/app_strings.dart';
-import 'package:meal_recommendation/core/utils/app_styles.dart';
+
+import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/app_strings.dart';
+import '../../../../../../core/utils/app_styles.dart';
 
 class LoginRedirect extends StatelessWidget {
   const LoginRedirect({super.key});
@@ -18,7 +19,7 @@ class LoginRedirect extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            context.pushNamed(AppRouter.kLoginView);
+            GoRouter.of(context).push(AppRouter.kLoginView);
           },
           child: Text(
             AppStrings.kLoginNow,
