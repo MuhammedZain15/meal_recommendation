@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:meal_recommendation/core/utils/app_images.dart';
-import 'package:meal_recommendation/features/auth/login/presentation/view/widgets/login_bloc_listener.dart';
-import 'package:meal_recommendation/features/auth/login/presentation/view/widgets/login_footer.dart';
-import 'package:meal_recommendation/features/auth/login/presentation/view/widgets/login_form.dart';
+import '../../../../../../core/utils/app_images.dart';
+import 'login_bloc_listener.dart';
+import 'login_footer.dart';
+import 'login_form.dart';
 import 'package:meal_recommendation/features/auth/login/presentation/view/widgets/social_methods.dart';
 import 'package:meal_recommendation/core/components/divider_with_text.dart';
 

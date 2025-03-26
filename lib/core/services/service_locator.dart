@@ -2,14 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:meal_recommendation/features/favorite/data/data_sources/favorites_remote_data_source.dart';
-import 'package:meal_recommendation/features/favorite/data/repositories/favorites_repository_impl.dart';
-import 'package:meal_recommendation/features/favorite/domain/repositories/favorites_repository.dart';
-
-import 'package:meal_recommendation/features/auth/login/data/data_source/login_datasource.dart';
-import 'package:meal_recommendation/features/auth/login/data/repository/login_repository_impl.dart';
-import 'package:meal_recommendation/features/auth/login/domain/repository/login_repository.dart';
-
+import '../../features/auth/login/data/data_source/login_datasource.dart';
+import '../../features/auth/login/data/repository/login_repository_impl.dart';
+import '../../features/auth/login/domain/repository/login_repository.dart';
 import '../../features/auth/login/domain/usecase/login_with_email_and_password_usecase.dart';
 import '../../features/auth/login/domain/usecase/login_with_google_usecase.dart';
 import '../../features/auth/register/data/data_source/register_datasource.dart';
@@ -18,8 +13,16 @@ import '../../features/auth/register/domain/repository/register_repository.dart'
 import '../../features/auth/register/domain/usecase/signup_with_email_usecase.dart';
 import '../../features/auth/register/domain/usecase/signup_with_facebook_usecase.dart';
 import '../../features/auth/register/domain/usecase/signup_with_google_usecase.dart';
+import '../../features/favorite/data/data_sources/favorites_remote_data_source.dart';
+import '../../features/favorite/data/repositories/favorites_repository_impl.dart';
+import '../../features/favorite/domain/repositories/favorites_repository.dart';
 import '../../features/favorite/domain/use_cases/get_favorite_meals_use_case.dart'
     show GetFavoriteMeals;
+import '../../features/profile/data/data_source/profile_remote_data_source.dart';
+import '../../features/profile/data/repository/profile_repository_impl.dart';
+import '../../features/profile/domain/repository/profile_repository.dart';
+import '../../features/profile/domain/usecase/get_profile_use_case.dart';
+import '../../features/profile/domain/usecase/update_profile_use_case.dart';
 import 'firebase_utils.dart';
 
 final GetIt sl = GetIt.instance;
@@ -68,7 +71,7 @@ void serviceLocator() {
   );
 
   sl.registerLazySingleton<LoginDataSourceImpl>(
-    () => LoginDataSourceImpl(firebaseService: sl<FirebaseService>()),
+    () => LoginDataSourceImpl(sl<FirebaseService>()),
   );
 
   sl.registerLazySingleton<LoginDataSource>(() => sl<LoginDataSourceImpl>());
@@ -83,5 +86,22 @@ void serviceLocator() {
 
   sl.registerLazySingleton<LoginWithGoogleUseCase>(
     () => LoginWithGoogleUseCase(sl<LoginRepository>()),
+  );
+
+  // Profile Feature
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(sl<FirebaseFirestore>()),
+  );
+
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(sl<ProfileRemoteDataSource>()),
+  );
+
+  sl.registerLazySingleton<GetProfileUseCase>(
+    () => GetProfileUseCase(sl<ProfileRepository>()),
+  );
+
+  sl.registerLazySingleton<UpdateProfileUseCase>(
+    () => UpdateProfileUseCase(sl<ProfileRepository>()),
   );
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meal_recommendation/core/utils/app_images.dart';
-import 'package:meal_recommendation/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
+import '../../../../../../core/utils/app_images.dart';
+import '../../manager/login_cubit/login_cubit.dart';
 
 class SocialMethods extends StatelessWidget {
   const SocialMethods({super.key});

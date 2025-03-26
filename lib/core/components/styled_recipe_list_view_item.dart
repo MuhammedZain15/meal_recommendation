@@ -39,7 +39,7 @@ class StyledRecipeListViewItem extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             title,
             style:

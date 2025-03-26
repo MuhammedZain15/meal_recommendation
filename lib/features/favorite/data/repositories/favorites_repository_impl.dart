@@ -1,7 +1,6 @@
-import 'package:meal_recommendation/features/favorite/data/data_sources/favorites_remote_data_source.dart';
-import 'package:meal_recommendation/features/favorite/domain/entities/meal_entity.dart';
-
+import '../../domain/entities/meal_entity.dart';
 import '../../domain/repositories/favorites_repository.dart';
+import '../data_sources/favorites_remote_data_source.dart';
 
 class FavoritesRepositoryImpl implements FavoritesRepository {
   final FavoritesRemoteDataSource remoteDataSource;

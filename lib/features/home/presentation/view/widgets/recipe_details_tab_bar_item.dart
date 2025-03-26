@@ -1,8 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:meal_recommendation/core/utils/app_colors.dart';
-import 'package:meal_recommendation/core/utils/app_styles.dart';
-import 'package:meal_recommendation/features/home/presentation/view/widgets/summary_tab.dart';
+
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_styles.dart';
+import 'summary_tab.dart';
 
 class RecipeDetailsTabBarItem extends StatelessWidget {
   const RecipeDetailsTabBarItem({super.key});
@@ -25,7 +25,10 @@ class RecipeDetailsTabBarItem extends StatelessWidget {
             indicator: UnderlineTabIndicator(
               insets: const EdgeInsets.symmetric(horizontal: 30.0),
               borderRadius: BorderRadius.circular(50),
-              borderSide: BorderSide(width: 5.0, color: AppColors.kPrimary),
+              borderSide: const BorderSide(
+                width: 5.0,
+                color: AppColors.kPrimary,
+              ),
             ),
             indicatorWeight: 5,
             dividerColor: Colors.transparent,
@@ -38,7 +41,7 @@ class RecipeDetailsTabBarItem extends StatelessWidget {
           ),
 
           // Tab Content (Flexible & Scrollable)
-          Expanded(
+          const Expanded(
             child: TabBarView(
               children: [
                 SummaryTab(), // Already scrollable inside

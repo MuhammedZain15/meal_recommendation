@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_recommendation/core/components/styled_app_bar.dart';
-import 'package:meal_recommendation/core/utils/app_images.dart';
-import 'package:meal_recommendation/core/utils/app_styles.dart';
-import 'package:meal_recommendation/features/home/presentation/view/widgets/recipe_details_tab_bar_item.dart';
+import '../../../../../core/utils/app_styles.dart';
+import 'recipe_details_tab_bar_item.dart';
+
+import '../../../../../core/components/styled_app_bar.dart';
+import '../../../../../core/utils/app_images.dart';
 
 class RecipeDetailsViewBody extends StatelessWidget {
   const RecipeDetailsViewBody({super.key});
@@ -31,7 +32,7 @@ class RecipeDetailsViewBody extends StatelessWidget {
           child: Container(
             height: 250,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppImages.food3),
                 fit: BoxFit.cover,
@@ -58,14 +59,17 @@ class RecipeDetailsViewBody extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                          text: 'meat .  ',
-                          style: AppStyles.font15Ww500DarkGreyColor),
+                        text: 'meat .  ',
+                        style: AppStyles.font15Ww500DarkGreyColor,
+                      ),
                       TextSpan(
-                          text: '14min . ',
-                          style: AppStyles.font15Ww500DarkGreyColor),
+                        text: '14min . ',
+                        style: AppStyles.font15Ww500DarkGreyColor,
+                      ),
                       TextSpan(
-                          text: '1 serving',
-                          style: AppStyles.font15Ww500DarkGreyColor),
+                        text: '1 serving',
+                        style: AppStyles.font15Ww500DarkGreyColor,
+                      ),
                     ],
                   ),
                 ),
@@ -76,7 +80,7 @@ class RecipeDetailsViewBody extends StatelessWidget {
         ),
 
         // Recipe Details Tab Bar & Content
-        SliverFillRemaining(
+        const SliverFillRemaining(
           hasScrollBody: true, // Allows scrolling within Tab content
           child: RecipeDetailsTabBarItem(),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meal_recommendation/core/utils/app_strings.dart';
 
+import '../utils/app_strings.dart';
 import '../utils/app_styles.dart';
 import 'is_favorite_widget.dart';
 
@@ -32,7 +32,7 @@ class StyledRecipeCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: 114,
+        height: 140,
         child: Stack(
           children: [
             Card(

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meal_recommendation/core/services/service_locator.dart';
-import 'package:meal_recommendation/features/auth/login/domain/usecase/login_with_email_and_password_usecase.dart';
 
+import '../../../../../../core/services/service_locator.dart';
+import '../../../domain/usecase/login_with_email_and_password_usecase.dart';
 import '../../../domain/usecase/login_with_google_usecase.dart';
 
 part 'login_state.dart';

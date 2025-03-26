@@ -28,12 +28,12 @@ class RememberMeWidget extends StatelessWidget {
               }
               return Colors.transparent;
             }),
-            checkColor: Color(0xFF0D1529),
-            side: BorderSide(color: Colors.white),
+            checkColor: const Color(0xFF0D1529),
+            side: const BorderSide(color: Colors.white),
           ),
         ),
-        SizedBox(width: 10),
-        Text(
+        const SizedBox(width: 10),
+        const Text(
           'Remember me and keep me login',
           style: TextStyle(color: Colors.white),
         ),

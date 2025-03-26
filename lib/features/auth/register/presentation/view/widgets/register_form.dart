@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:meal_recommendation/core/components/custom_button.dart';
-import 'package:meal_recommendation/core/components/custom_text_field.dart';
-import 'package:meal_recommendation/core/components/remember_me_widget.dart';
-import 'package:meal_recommendation/core/utils/app_strings.dart';
-import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../../core/components/custom_button.dart';
+import '../../../../../../core/components/custom_text_field.dart';
+import '../../../../../../core/components/remember_me_widget.dart';
+import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/app_strings.dart';
 import '../../controller/register_bloc.dart';
 import '../../controller/register_event.dart';
 import '../../controller/register_states.dart';

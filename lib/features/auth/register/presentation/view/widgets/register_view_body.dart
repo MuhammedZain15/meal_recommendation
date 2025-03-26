@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:meal_recommendation/core/utils/app_images.dart';
-import 'package:meal_recommendation/features/auth/register/presentation/view/widgets/login_redirect.dart';
-import 'package:meal_recommendation/features/auth/register/presentation/view/widgets/register_form.dart';
-import 'package:meal_recommendation/features/auth/register/presentation/view/widgets/social_login_button.dart';
+import '../../../../../../core/utils/app_images.dart';
+import 'login_redirect.dart';
+import 'register_form.dart';
+import 'social_login_button.dart';
 
 class RegisterViewBody extends StatelessWidget {
   const RegisterViewBody({super.key});

@@ -4,6 +4,9 @@ class AppImages {
   static const String settings = 'assets/images/settings.png';
   static const String search = 'assets/images/search.png';
   static const String account = 'assets/images/account.svg';
+  static const String home = 'assets/images/home.svg';
+  static const String favorite = 'assets/images/favorite.svg';
+  static const String profile = 'assets/images/profile.svg';
   static const String eye = 'assets/images/eye.svg';
   static const String lock = 'assets/images/Lock.svg';
   static const String food1 = 'assets/images/food1.png';

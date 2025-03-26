@@ -12,7 +12,7 @@ class StyledProfileAvatar extends StatelessWidget {
       children: [
         Container(
           height: 100,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.kGrey,
           ),
@@ -27,11 +27,15 @@ class StyledProfileAvatar extends StatelessWidget {
             child: Container(
               height: 35,
               width: 35,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.kPrimary,
               ),
-              child: Icon(FontAwesomeIcons.pen, color: Colors.white, size: 16),
+              child: const Icon(
+                FontAwesomeIcons.pen,
+                color: Colors.white,
+                size: 16,
+              ),
             ),
           ),
         ),
