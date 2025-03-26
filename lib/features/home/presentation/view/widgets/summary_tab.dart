@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recommendation/features/home/presentation/view/widgets/nutrition_item.dart';
+import 'nutrition_item.dart';
 
 class SummaryTab extends StatelessWidget {
   const SummaryTab({super.key});

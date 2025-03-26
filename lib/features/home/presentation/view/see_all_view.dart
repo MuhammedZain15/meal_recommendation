@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recommendation/core/utils/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 
 import 'widgets/see_all_view_body.dart';
 

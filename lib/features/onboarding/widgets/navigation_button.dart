@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_recommendation/core/utils/app_colors.dart';
-import 'package:meal_recommendation/core/utils/app_strings.dart';
+
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_strings.dart';
 
 class NavigationButton extends StatelessWidget {
   final bool isNext;

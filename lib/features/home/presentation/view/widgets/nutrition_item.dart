@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recommendation/core/utils/app_colors.dart';
+
+import '../../../../../core/utils/app_colors.dart';
 
 class NutritionItem extends StatelessWidget {
   final String title;

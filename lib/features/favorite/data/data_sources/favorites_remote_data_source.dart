@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meal_recommendation/features/favorite/domain/entities/meal_entity.dart';
+
+import '../../domain/entities/meal_entity.dart';
 
 abstract class FavoritesRemoteDataSource {
   Future<List<Meal>> fetchFavoriteMeals();

@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meal_recommendation/core/error/custom_exception.dart';
+import '../../../../../core/error/custom_exception.dart';
 
-import 'package:meal_recommendation/core/error/failure.dart';
-import 'package:meal_recommendation/features/auth/login/data/data_source/login_datasource.dart';
+import '../../../../../core/error/failure.dart';
+import '../data_source/login_datasource.dart';
 import '../../domain/repository/login_repository.dart';
 
 class LoginRepositoryImpl implements LoginRepository {

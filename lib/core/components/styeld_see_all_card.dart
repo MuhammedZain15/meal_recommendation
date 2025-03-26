@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recommendation/core/utils/app_colors.dart';
-import 'package:meal_recommendation/core/utils/app_styles.dart';
+
+import '../utils/app_colors.dart';
+import '../utils/app_styles.dart';
 
 class StyeldSeeAllCard extends StatelessWidget {
    const StyeldSeeAllCard({super.key,required this.title,required this.imageUrl,required this.time,required this.ingredients,required this.onTap});

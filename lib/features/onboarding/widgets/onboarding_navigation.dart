@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recommendation/core/utils/app_router.dart';
-import 'package:meal_recommendation/features/onboarding/widgets/navigation_button.dart';
+import '../../../core/utils/app_router.dart';
+import 'navigation_button.dart';
 
 import 'onboarding_dot.dart';
 

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_recommendation/core/components/styled_app_bar.dart';
-import 'package:meal_recommendation/core/utils/app_images.dart';
 import 'package:meal_recommendation/core/utils/app_styles.dart';
 import 'package:meal_recommendation/features/home/presentation/view/widgets/recipe_details_tab_bar_item.dart';
+
+import '../../../../../core/components/styled_app_bar.dart';
+import '../../../../../core/utils/app_images.dart';
 
 class RecipeDetailsViewBody extends StatelessWidget {
   const RecipeDetailsViewBody({super.key});
