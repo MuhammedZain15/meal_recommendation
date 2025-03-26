@@ -1,4 +1,3 @@
-
 import '../../register/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
@@ -20,9 +19,9 @@ class UserModel extends UserEntity {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson([String? userId]) {
     return {
-      'useruid': uid,
+      'useruid': userId ?? uid,
       'username': username,
       'useremail': email,
       'userphone': phone,
