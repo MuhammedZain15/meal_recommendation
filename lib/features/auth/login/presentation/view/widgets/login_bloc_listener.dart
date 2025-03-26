@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_recommendation/core/utils/app_router.dart';
-import 'package:meal_recommendation/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
+
+import '../../../../../../core/utils/app_router.dart';
+import '../../manager/login_cubit/login_cubit.dart';
 
 class LoginBlocListener extends StatelessWidget {
   const LoginBlocListener({super.key});
@@ -14,22 +15,18 @@ class LoginBlocListener extends StatelessWidget {
         if (state is LoginError) {
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.red,
-            ),
+            SnackBar(content: Text(state.message), backgroundColor: Colors.red),
           );
         }
         if (state is LoginLoaded) {
           Navigator.pop(context);
-          context.pushNamed(AppRouter.kFavoriteView);
+          context.pushReplacementNamed(AppRouter.kNavBarView);
         }
         if (state is LoginLoading) {
           showDialog(
             context: context,
-            builder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ),
+            builder:
+                (context) => const Center(child: CircularProgressIndicator()),
           );
         }
       },
