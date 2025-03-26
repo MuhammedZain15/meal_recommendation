@@ -9,12 +9,14 @@ class ProfileFormSection extends StatelessWidget {
     required this.emailController,
     required this.phoneController,
     required this.passwordController,
+    this.isEnabled = true,
   });
 
   final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController phoneController;
   final TextEditingController passwordController;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +25,22 @@ class ProfileFormSection extends StatelessWidget {
       child: Column(
         spacing: 20,
         children: [
-          StyledProfileTextField(controller: nameController),
-          StyledProfileTextField(controller: emailController),
-          StyledProfileTextField(controller: phoneController),
-          StyledProfileTextField(controller: passwordController),
+          StyledProfileTextField(
+            isEnabled: isEnabled,
+            controller: emailController,
+          ),
+          StyledProfileTextField(
+            isEnabled: isEnabled,
+            controller: nameController,
+          ),
+          StyledProfileTextField(
+            isEnabled: isEnabled,
+            controller: phoneController,
+          ),
+          StyledProfileTextField(
+            isEnabled: isEnabled,
+            controller: passwordController,
+          ),
         ],
       ),
     );
