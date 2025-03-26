@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,8 +17,6 @@ import '../../features/home/presentation/view/home_view.dart';
 import '../../features/home/presentation/view/recipe_details_view.dart';
 import '../../features/home/presentation/view/see_all_view.dart';
 import '../../features/onboarding/onboarding_view.dart';
-import '../../features/profile/data/data_source/profile_remote_data_source.dart';
-import '../../features/profile/data/repository/profile_repository_impl.dart';
 import '../../features/profile/domain/usecase/get_profile_use_case.dart';
 import '../../features/profile/domain/usecase/update_profile_use_case.dart';
 import '../../features/profile/presentation/controller/bloc/profile_bloc.dart';
@@ -42,7 +39,7 @@ abstract class AppRouter {
   static const kRecipeDetailsView = '/recipeDetailsView';
 
   static final GoRouter router = GoRouter(
-    initialLocation: kNavBarView,
+    initialLocation: kSplashView,
     routes: [
       GoRoute(
         path: kSplashView,
@@ -56,16 +53,8 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) => ProfileBloc(
-                  getUser: GetProfileUseCase(
-                    ProfileRepositoryImpl(
-                      ProfileRemoteDataSourceImpl( FirebaseFirestore.instance),
-                    ),
-                  ),
-                  updateUser: UpdateProfileUseCase(
-                    ProfileRepositoryImpl(
-                      ProfileRemoteDataSourceImpl(  FirebaseFirestore.instance),
-                    ),
-                  ),
+                  getUser: sl<GetProfileUseCase>(),
+                  updateUser: sl<UpdateProfileUseCase>(),
                 ),
             child: const StyledBottomNavBar(),
           );
