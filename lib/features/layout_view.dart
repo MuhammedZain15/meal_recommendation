@@ -9,14 +9,14 @@ import 'favorite/presentation/pages/favorite_view.dart';
 import 'home/presentation/view/home_view.dart';
 import 'profile/presentation/view/profile_view.dart';
 
-class StyledBottomNavBar extends StatefulWidget {
-  const StyledBottomNavBar({super.key});
+class LayoutView extends StatefulWidget {
+  const LayoutView({super.key});
 
   @override
-  StyledBottomNavBarState createState() => StyledBottomNavBarState();
+  LayoutViewState createState() => LayoutViewState();
 }
 
-class StyledBottomNavBarState extends State<StyledBottomNavBar> {
+class LayoutViewState extends State<LayoutView> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [

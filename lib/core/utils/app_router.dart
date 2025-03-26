@@ -22,12 +22,12 @@ import '../../features/profile/domain/usecase/update_profile_use_case.dart';
 import '../../features/profile/presentation/controller/bloc/profile_bloc.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/splash/splash_view.dart';
-import '../../features/styled_bottom_nav_bar.dart';
+import '../../features/layout_view.dart';
 import '../services/service_locator.dart';
 
 abstract class AppRouter {
   static const kHomeView = '/homeView';
-  static const kNavBarView = '/navBarView';
+  static const kLayoutView = '/layoutView';
   static const kSplashView = '/';
   static const kOnboardingView = '/onboardingView';
   static const kSeeAllView = '/seeAllView';
@@ -48,7 +48,8 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: kNavBarView,
+        path: kLayoutView,
+        name: kLayoutView,
         builder: (context, state) {
           return BlocProvider(
             create:
@@ -56,7 +57,7 @@ abstract class AppRouter {
                   getUser: sl<GetProfileUseCase>(),
                   updateUser: sl<UpdateProfileUseCase>(),
                 ),
-            child: const StyledBottomNavBar(),
+            child: const LayoutView(),
           );
         },
       ),

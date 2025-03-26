@@ -20,7 +20,7 @@ class LoginBlocListener extends StatelessWidget {
         }
         if (state is LoginLoaded) {
           Navigator.pop(context);
-          context.pushReplacementNamed(AppRouter.kNavBarView);
+          context.pushReplacementNamed(AppRouter.kLayoutView);
         }
         if (state is LoginLoading) {
           showDialog(
