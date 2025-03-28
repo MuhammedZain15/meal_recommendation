@@ -1,6 +1,6 @@
 # Meal Recommendation App - Flutter Food Application 🍽️✨
 
-![App Banner](banner.jpg)
+![App Banner](screenshots/banner.jpg)
 
 ## 🍳 App Showcase
 
