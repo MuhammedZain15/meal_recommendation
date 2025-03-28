@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:meal_recommendation/core/components/is_favorite_widget.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
@@ -25,13 +26,13 @@ class RecipeCardItem extends StatelessWidget {
               // Recipe Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  recipe.imageUrl.isNotEmpty
-                      ? recipe.imageUrl
-                      : 'assets/images/food1.png',
+                child: CachedNetworkImage(
+
                   width: 100,
                   height: 100,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.cover, imageUrl:recipe.imageUrl.isNotEmpty
+                    ? recipe.imageUrl
+                    : 'assets/images/food1.png',
                 ),
               ),
               const SizedBox(width: 12),
