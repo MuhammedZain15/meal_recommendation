@@ -16,7 +16,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       final user = await remoteDataSource.getUser();
       return Right(user);
     } catch (e) {
-      return Left(ServerFailure('Error getting user'));
+      return const Left(Failure('Error getting user'));
     }
   }
 
@@ -26,7 +26,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       await remoteDataSource.updateUser(user);
       return const Right(null);
     } catch (e) {
-      return Left(ServerFailure('Error updating user'));
+      return const Left(Failure('Error updating user'));
     }
   }
 }
