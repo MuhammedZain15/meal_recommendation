@@ -1,4 +1,6 @@
-import '../../../../../core/services/firebase_utils.dart';
+import 'package:meal_recommendation/core/error/failure.dart';
+
+import '../../../../../core/services/firebase_auth_service.dart';
 import '../../../shared/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,7 +16,7 @@ abstract class RegisterRemoteDataSource {
 }
 
 class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
-  final FirebaseService firebaseService;
+  final FirebaseAuthService firebaseService;
 
   RegisterRemoteDataSourceImpl({required this.firebaseService});
 
@@ -25,31 +27,30 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
     required String username,
     required String phone,
   }) async {
-    try {
-      User? user = await firebaseService.signUpWithEmail(email, password);
-      if (user == null) throw Exception("User creation failed");
+    User? user = await firebaseService.signUpWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    if (user == null) throw const Failure("User creation failed");
 
-      await user.updateDisplayName(username);
+    await user.updateDisplayName(username);
 
-      final userModel = UserModel(
-        uid: user.uid,
-        username: username,
-        email: email,
-        phone: phone,
-        password: password,
-      );
-      await firebaseService.saveUserData(user.uid, userModel.toJson());
+    final userModel = UserModel(
+      uid: user.uid,
+      username: username,
+      email: email,
+      phone: phone,
+      password: password,
+    );
+    await firebaseService.saveUserData(user.uid, userModel.toJson());
 
-      return userModel;
-    } catch (e) {
-      throw Exception("Firebase Error: $e");
-    }
+    return userModel;
   }
 
   @override
   Future<UserModel> signInWithGoogle() async {
     final user = await firebaseService.signInWithGoogle();
-    if (user == null) throw Exception("Google Sign-In failed");
+    if (user == null) throw const Failure("Google Sign-In failed");
 
     return UserModel(
       uid: user.uid,

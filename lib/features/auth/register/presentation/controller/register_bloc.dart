@@ -34,7 +34,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             FirebaseFirestore.instance,
           );
         } catch (e) {
-          print('Error initializing recipes: $e');
           // Continue with registration even if recipe initialization fails
         }
 
@@ -55,7 +54,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             FirebaseFirestore.instance,
           );
         } catch (e) {
-          print('Error initializing recipes: $e');
           // Continue with registration even if recipe initialization fails
         }
 
@@ -76,7 +74,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             FirebaseFirestore.instance,
           );
         } catch (e) {
-          print('Error initializing recipes: $e');
           // Continue with registration even if recipe initialization fails
         }
 
