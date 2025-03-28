@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,10 +22,8 @@ class RecipeDetailsViewBody extends StatelessWidget {
           expandedHeight: 250,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
-            background: Image.network(
-              recipe.imageUrl.isNotEmpty
-                  ? recipe.imageUrl
-                  : 'assets/images/food1.png',
+            background: CachedNetworkImage(
+              imageUrl: recipe.imageUrl,
               fit: BoxFit.cover,
             ),
           ),

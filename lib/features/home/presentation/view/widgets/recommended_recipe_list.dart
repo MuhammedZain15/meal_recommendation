@@ -23,10 +23,8 @@ class RecommendedRecipeList extends StatelessWidget {
       itemBuilder: (context, index) {
         final recipe = recipes[index];
         return StyledRecipeCard(
-          image:
-              recipe.imageUrl.isNotEmpty
-                  ? recipe.imageUrl
-                  : 'assets/images/food1.png',
+          image: recipe.imageUrl,
+
           // Fallback image
           title: recipe.typeOfMeal,
           subtitle: recipe.name,

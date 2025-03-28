@@ -50,7 +50,7 @@ abstract class AppRouter {
   static const kGemini = '/gemini';
 
   static final GoRouter router = GoRouter(
-    initialLocation: kLoginView,
+    initialLocation: kSplashView,
     routes: [
       GoRoute(
         path: kSplashView,

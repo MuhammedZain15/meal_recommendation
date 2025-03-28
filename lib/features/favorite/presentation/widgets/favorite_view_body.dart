@@ -57,8 +57,10 @@ class FavoriteViewBody extends StatelessWidget {
                                   subtitle: recipe.name,
                                   ingredientsCount: recipe.ingredients.length,
                                   time: recipe.time,
-                                  rating: 4, // Default rating
-                                  isFavorite: true, // Always true in favorites
+                                  rating: 4,
+                                  // Default rating
+                                  isFavorite: true,
+                                  // Always true in favorites
                                   recipeId: recipe.id,
                                   onTap: () {
                                     context.push(

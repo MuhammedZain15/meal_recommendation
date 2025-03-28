@@ -55,11 +55,7 @@ class SeeAllViewBody extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                    recipe.imageUrl.isNotEmpty
-                                        ? recipe.imageUrl
-                                        : 'assets/images/food1.png',
-                                  ),
+                                  image: NetworkImage(recipe.imageUrl),
                                   fit: BoxFit.cover,
                                 ),
                               ),

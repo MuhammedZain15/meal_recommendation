@@ -27,12 +27,10 @@ class RecipeCardItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CachedNetworkImage(
-
                   width: 100,
                   height: 100,
-                  fit: BoxFit.cover, imageUrl:recipe.imageUrl.isNotEmpty
-                    ? recipe.imageUrl
-                    : 'assets/images/food1.png',
+                  fit: BoxFit.cover,
+                  imageUrl: recipe.imageUrl,
                 ),
               ),
               const SizedBox(width: 12),
