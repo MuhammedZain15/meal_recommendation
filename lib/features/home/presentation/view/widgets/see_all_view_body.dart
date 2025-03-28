@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/components/styled_recipe_card.dart';
-import 'package:meal_recommendation/core/utils/app_images.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:meal_recommendation/core/utils/app_styles.dart';
 
@@ -126,7 +125,7 @@ class SeeAllViewBody extends StatelessWidget {
                       image:
                           recipe.imageUrl.isNotEmpty
                               ? recipe.imageUrl
-                              : AppImages.food1,
+                              : 'assets/images/food1.png',
                       title: recipe.typeOfMeal,
                       subtitle: recipe.name,
                       ingredientsCount: recipe.ingredients.length,

@@ -21,7 +21,7 @@ class RecipeDetailsViewBody extends StatelessWidget {
           expandedHeight: 250,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
-            background: Image.asset(
+            background: Image.network(
               recipe.imageUrl.isNotEmpty
                   ? recipe.imageUrl
                   : 'assets/images/food1.png',

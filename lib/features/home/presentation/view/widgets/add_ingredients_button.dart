@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
+import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:meal_recommendation/core/utils/app_strings.dart';
 
 class AddIngredientsButton extends StatelessWidget {
@@ -9,7 +11,7 @@ class AddIngredientsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //! Functionality to add ingredients
+        GoRouter.of(context).push(AppRouter.kGemini);
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.4,
@@ -31,3 +33,4 @@ class AddIngredientsButton extends StatelessWidget {
     );
   }
 }
+

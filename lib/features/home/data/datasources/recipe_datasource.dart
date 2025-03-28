@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../../../core/error/failure.dart';
 import '../models/recipe_model.dart';
 
 abstract class RecipeDataSource {
@@ -41,11 +40,11 @@ class RecipeDataSourceImpl implements RecipeDataSource {
                 .doc(recipeId)
                 .get();
       } catch (e) {
-        throw Failure(e.toString());
+        print('Error fetching recipe from user collection: $e');
       }
 
       // If not found in user's collection, try public recipes
-      if (!recipeDoc.exists) {
+      if (recipeDoc == null || !recipeDoc.exists) {
         recipeDoc = await firestore.collection('recipes').doc(recipeId).get();
       }
 
@@ -70,6 +69,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
 
       return null;
     } catch (e) {
+      print('Error getting recipe by ID: $e');
       return null;
     }
   }
@@ -79,8 +79,11 @@ class RecipeDataSourceImpl implements RecipeDataSource {
     try {
       final userId = _currentUserId;
       if (userId == null) {
+        print('No user logged in, returning empty recipes list');
         return [];
       }
+
+      print('Fetching all recipes for user: $userId');
 
       // Get user's recipes
       final userRecipesSnapshot =
@@ -89,6 +92,8 @@ class RecipeDataSourceImpl implements RecipeDataSource {
               .doc(userId)
               .collection('recipes')
               .get();
+
+      print('Found ${userRecipesSnapshot.docs.length} user recipes');
 
       // Get user favorites to mark recipes as favorite
       final userFavoritesSnapshot =
@@ -103,6 +108,8 @@ class RecipeDataSourceImpl implements RecipeDataSource {
         userFavorites[doc.id] = true;
       }
 
+      print('Found ${userFavorites.length} favorites');
+
       // Process the recipes with favorite status
       List<RecipeModel> recipes = [];
       for (var doc in userRecipesSnapshot.docs) {
@@ -112,12 +119,13 @@ class RecipeDataSourceImpl implements RecipeDataSource {
           data['isFavorite'] = userFavorites.containsKey(doc.id);
           recipes.add(RecipeModel.fromJson(data, doc.id));
         } catch (e) {
-          throw Failure(e.toString());
+          print('Error parsing recipe ${doc.id}: $e');
         }
       }
 
       return recipes;
     } catch (e) {
+      print('Error getting all recipes: $e');
       return [];
     }
   }
@@ -128,6 +136,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
       final recipes = await getAllRecipes();
       return recipes.where((recipe) => recipe.isTrending).toList();
     } catch (e) {
+      print('Error getting trending recipes: $e');
       return [];
     }
   }
@@ -138,6 +147,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
       final recipes = await getAllRecipes();
       return recipes.where((recipe) => recipe.isRecommended).toList();
     } catch (e) {
+      print('Error getting recommended recipes: $e');
       return [];
     }
   }
@@ -147,6 +157,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
     try {
       final userId = _currentUserId;
       if (userId == null) {
+        print('Cannot toggle favorite: No user logged in');
         return;
       }
 
@@ -157,16 +168,19 @@ class RecipeDataSourceImpl implements RecipeDataSource {
           .doc(recipeId);
 
       if (isFavorite) {
+        print('Adding recipe $recipeId to favorites');
         await userFavoritesRef.set({
           'recipeId': recipeId,
           'userId': userId,
           'timestamp': FieldValue.serverTimestamp(),
         });
       } else {
+        print('Removing recipe $recipeId from favorites');
         await userFavoritesRef.delete();
       }
     } catch (e) {
-      rethrow; // Rethrow to allow handling in UI
+      print('Error toggling favorite: $e');
+      throw e; // Rethrow to allow handling in UI
     }
   }
 
@@ -174,9 +188,11 @@ class RecipeDataSourceImpl implements RecipeDataSource {
   Stream<List<RecipeModel>> getFavoriteRecipes() {
     final userId = _currentUserId;
     if (userId == null) {
+      print('Cannot get favorite recipes: No user logged in');
       return Stream.value([]);
     }
 
+    print('Setting up favorites stream for user $userId');
     return firestore
         .collection('users')
         .doc(userId)
@@ -184,6 +200,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
         .snapshots()
         .asyncMap((snapshot) async {
           final favoriteIds = snapshot.docs.map((doc) => doc.id).toList();
+          print('Found ${favoriteIds.length} favorite IDs');
 
           if (favoriteIds.isEmpty) {
             return [];
@@ -199,6 +216,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
             }
           }
 
+          print('Retrieved ${favoriteRecipes.length} favorite recipes');
           return favoriteRecipes;
         });
   }
@@ -208,15 +226,17 @@ class RecipeDataSourceImpl implements RecipeDataSource {
     try {
       return await getAllRecipes();
     } catch (e) {
+      print('Error getting user recipes: $e');
       return [];
     }
   }
-
+  
   @override
   Future<void> addRecipeToUser(RecipeModel recipe) {
     try {
       final userId = _currentUserId;
       if (userId == null) {
+        print('Cannot add recipe to user: No user logged in');
         return Future.error('No user logged in');
       }
 
@@ -228,6 +248,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
 
       return userRecipesRef.set(recipe.toJson());
     } catch (e) {
+      print('Error adding recipe to user: $e');
       return Future.error('Error adding recipe to user: $e');
     }
   }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
@@ -33,7 +34,8 @@ class StyeldSeeAllCard extends StatelessWidget {
                   Column(
                   spacing: 5,
                   children: [
-                    Image.asset(imageUrl, width: double.infinity),
+                    // Image.asset(imageUrl, width: double.infinity),
+                    CachedNetworkImage(imageUrl: imageUrl,width: double.infinity,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Column(

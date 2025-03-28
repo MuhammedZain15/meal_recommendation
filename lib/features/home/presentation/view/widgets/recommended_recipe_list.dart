@@ -26,16 +26,18 @@ class RecommendedRecipeList extends StatelessWidget {
           image:
               recipe.imageUrl.isNotEmpty
                   ? recipe.imageUrl
-                  : 'assets/images/food1.png', // Fallback image
+                  : 'assets/images/food1.png',
+          // Fallback image
           title: recipe.typeOfMeal,
           subtitle: recipe.name,
           ingredientsCount: recipe.ingredients.length,
           time: recipe.time,
-          rating: 4, // Default rating - could be dynamic in the future
+          rating: 4,
+          // Default rating - could be dynamic in the future
           isFavorite: recipe.isFavorite,
           recipeId: recipe.id,
           onTap: () {
-            context.push(AppRouter.kRecipeDetailsView);
+            context.push(AppRouter.kRecipeDetailsView, extra: recipe);
           },
         );
       },
