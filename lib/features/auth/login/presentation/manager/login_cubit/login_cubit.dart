@@ -34,7 +34,6 @@ class LoginCubit extends Cubit<LoginState> {
           FirebaseFirestore.instance,
         );
       } catch (e) {
-        print('Error initializing recipes: $e');
         // Continue with login even if recipe initialization fails
       }
       emit(LoginLoaded());
@@ -51,7 +50,6 @@ class LoginCubit extends Cubit<LoginState> {
           FirebaseFirestore.instance,
         );
       } catch (e) {
-        print('Error initializing recipes: $e');
         // Continue with login even if recipe initialization fails
       }
       emit(LoginLoaded());
