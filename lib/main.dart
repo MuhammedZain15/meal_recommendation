@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'core/error/failure.dart';
 import 'core/helpers/firebase_init.dart';
 import 'core/services/service_locator.dart';
 import 'core/utils/app_router.dart';
@@ -24,20 +25,15 @@ void main() async {
   // Check if user is logged in
   final User? currentUser = FirebaseAuth.instance.currentUser;
   if (currentUser != null) {
-    print('User is logged in: ${currentUser.uid}');
-    print('Email: ${currentUser.email}');
-
     // User is logged in, initialize recipes
     try {
       await RecipeInitializer.initializeRecipesIfNeeded(
         FirebaseFirestore.instance,
       );
     } catch (e) {
-      print('Failed to initialize recipes: $e');
+      throw Failure(e.toString());
     }
-  } else {
-    print('No user logged in. Skipping recipe initialization.');
-  }
+  } else {}
 
   runApp(
     ScreenUtilInit(

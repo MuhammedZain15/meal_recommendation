@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../../core/error/failure.dart';
+
 class RecipeInitializer {
   static Future<void> initializeRecipesIfNeeded(
     FirebaseFirestore firestore,
@@ -11,11 +13,8 @@ class RecipeInitializer {
       final String? userId = currentUser?.uid;
 
       if (userId == null) {
-        print('Warning: No user logged in during data initialization.');
         return; // Don't proceed if no user is logged in
       }
-
-      print('Checking recipes for user: $userId');
 
       // Check if user document exists first
       final userDoc = await firestore.collection('users').doc(userId).get();
@@ -27,7 +26,6 @@ class RecipeInitializer {
           'displayName': currentUser?.displayName,
           'createdAt': FieldValue.serverTimestamp(),
         });
-        print('Created user document for $userId');
       }
 
       // Check if user has recipes
@@ -40,16 +38,10 @@ class RecipeInitializer {
               .get();
 
       if (userRecipesSnapshot.docs.isEmpty) {
-        print(
-          'Initializing recipe database with sample data for user $userId...',
-        );
         await _addSampleRecipes(firestore, userId);
-        print('Recipe database initialized successfully for user $userId!');
-      } else {
-        print('User $userId already has recipes. Skipping initialization.');
-      }
+      } else {}
     } catch (e) {
-      print('Error initializing recipes: $e');
+      throw Failure(e.toString());
     }
   }
 
@@ -321,12 +313,8 @@ class RecipeInitializer {
 
       // Commit all changes
       await batch.commit();
-      print(
-        'Successfully created recipes for user $userId with user-specific IDs',
-      );
     } catch (e) {
-      print('Error adding sample recipes: $e');
-      throw e;
+      rethrow;
     }
   }
 }

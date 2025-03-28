@@ -33,11 +33,9 @@ class UserService {
     // Check if user already has recipes
     final hasRecipes = await hasUserRecipes();
     if (hasRecipes) {
-      print('User already has recipes. Skipping default recipe creation.');
       return;
     }
 
-    print('Creating default recipes for user $currentUserId');
 
     // Batch write for better performance
     final batch = _firestore.batch();
@@ -64,7 +62,6 @@ class UserService {
 
     // Execute batch
     await batch.commit();
-    print('Created ${recipes.length} default recipes for user $currentUserId');
   }
 
   // Sample recipes data

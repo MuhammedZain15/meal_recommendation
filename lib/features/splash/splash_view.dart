@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/utils/app_images.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
 
+import '../../core/error/failure.dart';
 import '../home/data/repo/recipe_initializer.dart';
 
 class SplashView extends StatefulWidget {
@@ -32,12 +33,11 @@ class _SplashViewState extends State<SplashView> {
     // If user is logged in, check if they have recipes and create defaults if needed
     if (currentUser != null) {
       try {
-        print('User is logged in at splash screen: ${currentUser.uid}');
         await RecipeInitializer.initializeRecipesIfNeeded(
           FirebaseFirestore.instance,
         );
       } catch (e) {
-        print('Error creating default recipes at splash: $e');
+        throw Failure(e.toString());
       }
 
       if (!mounted) return;
