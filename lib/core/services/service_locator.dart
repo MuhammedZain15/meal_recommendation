@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:meal_recommendation/features/auth/shared/services/firebase_auth_service_impl.dart';
 
 import '../../features/auth/login/data/data_source/login_datasource.dart';
 import '../../features/auth/login/data/repository/login_repository_impl.dart';
@@ -27,7 +28,7 @@ import '../../features/profile/data/repository/profile_repository_impl.dart';
 import '../../features/profile/domain/repository/profile_repository.dart';
 import '../../features/profile/domain/usecase/get_profile_use_case.dart';
 import '../../features/profile/domain/usecase/update_profile_use_case.dart';
-import 'firebase_utils.dart';
+import 'firebase_auth_service.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -37,7 +38,12 @@ void serviceLocator() {
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
 
   // Firebase Service
-  sl.registerLazySingleton<FirebaseService>(() => FirebaseService());
+  sl.registerLazySingleton<FirebaseAuthService>(
+    () => FirebaseAuthServiceImpl(
+      auth: sl<FirebaseAuth>(),
+      firestore: sl<FirebaseFirestore>(),
+    ),
+  );
 
   // Recipe Feature
   sl.registerLazySingleton<RecipeDataSource>(
@@ -55,7 +61,9 @@ void serviceLocator() {
 
   // Register Feature
   sl.registerLazySingleton<RegisterRemoteDataSource>(
-    () => RegisterRemoteDataSourceImpl(firebaseService: sl<FirebaseService>()),
+    () => RegisterRemoteDataSourceImpl(
+      firebaseService: sl<FirebaseAuthService>(),
+    ),
   );
 
   sl.registerLazySingleton<RegisterRepository>(
@@ -91,7 +99,7 @@ void serviceLocator() {
 
   // Login Feature
   sl.registerLazySingleton<LoginDataSourceImpl>(
-    () => LoginDataSourceImpl(sl<FirebaseService>()),
+    () => LoginDataSourceImpl(sl<FirebaseAuthService>()),
   );
 
   sl.registerLazySingleton<LoginDataSource>(() => sl<LoginDataSourceImpl>());
