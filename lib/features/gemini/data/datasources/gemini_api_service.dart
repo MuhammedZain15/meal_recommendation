@@ -1,14 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class GeminiApiService {
-  final String apiKey;
+  final apiKey = dotenv.env['GEMINI_API_KEY'];
 
-  GeminiApiService({required this.apiKey});
-
-  Future<Map<String, dynamic>> fetchRecipe(String dishName) async {
-    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+  Future<Map<String, dynamic>> fetchRecipeFromGemini(String dishName) async {
+    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey!);
     final prompt = '''
     Provide a JSON recipe for "$dishName" with:
     {

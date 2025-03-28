@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_recommendation/core/components/is_favorite_widget.dart';
 import 'package:meal_recommendation/core/utils/app_colors.dart';
+import 'package:meal_recommendation/core/utils/app_images.dart';
 
 import '../../../data/models/recipe_model.dart';
 
@@ -25,14 +26,7 @@ class RecipeCardItem extends StatelessWidget {
               // Recipe Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  recipe.imageUrl.isNotEmpty
-                      ? recipe.imageUrl
-                      : 'assets/images/food1.png',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
+                child: getImage(recipe.imageUrl),
               ),
               const SizedBox(width: 12),
 
@@ -103,6 +97,22 @@ class RecipeCardItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+Widget getImage(String imagePath) {
+  if (imagePath.startsWith('http') || imagePath.startsWith('https')) {
+    return Image.network(imagePath, width: 100, height: 100, fit: BoxFit.cover);
+  } else if (imagePath.startsWith('assets/')) {
+    return Image.asset(imagePath, width: 100, height: 100, fit: BoxFit.cover);
+  } else {
+    // Default case or error handling
+    return Image.asset(
+      AppImages.food1,
+      width: 100,
+      height: 100,
+      fit: BoxFit.cover,
     );
   }
 }

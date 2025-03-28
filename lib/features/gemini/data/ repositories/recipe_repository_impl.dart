@@ -48,21 +48,21 @@ class RecipeRepositoryImpl implements RecipeRepository {
     }
   }
 
-  @override
-  Future<List<Recipe>> fetchUserRecipes(String userId) async {
-    try {
-      final querySnapshot = await firestore
-          .collection('users')
-          .doc(userId)
-          .collection('recipes')
-          .get();
+  // @override
+  // Future<List<Recipe>> fetchUserRecipes(String userId) async {
+  //   try {
+  //     final querySnapshot = await firestore
+  //         .collection('users')
+  //         .doc(userId)
+  //         .collection('recipes')
+  //         .get();
 
-      return querySnapshot.docs
-          .map((doc) => RecipeModel.fromJson(doc.data(), doc.id))
-          .toList();
-    } catch (e) {
-      print('Error fetching user recipes: $e');
-      throw Exception('Failed to fetch user recipes');
-    }
-  }
+  //     return querySnapshot.docs
+  //         .map((doc) => RecipeModel.fromJson(doc.data(), doc.id))
+  //         .toList();
+  //   } catch (e) {
+  //     print('Error fetching user recipes: $e');
+  //     throw Exception('Failed to fetch user recipes');
+  //   }
+  // }
 }

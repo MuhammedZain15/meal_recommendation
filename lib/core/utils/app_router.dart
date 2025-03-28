@@ -1,7 +1,14 @@
 // lib/core/utils/app_router.dart
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meal_recommendation/features/gemini/data/%20repositories/recipe_repository_impl.dart';
+import 'package:meal_recommendation/features/gemini/data/datasources/gemini_api_service.dart';
+import 'package:meal_recommendation/features/gemini/data/datasources/recipe_api_service.dart';
+import 'package:meal_recommendation/features/gemini/domain/usecases/fetch_recipe.dart';
+import 'package:meal_recommendation/features/gemini/presentation/bloc/recipe_bloc.dart';
+import 'package:meal_recommendation/features/gemini/presentation/pages/recipe_page.dart';
 
 import '../../features/auth/login/domain/usecase/login_with_email_and_password_usecase.dart';
 import '../../features/auth/login/domain/usecase/login_with_google_usecase.dart';
@@ -40,6 +47,7 @@ abstract class AppRouter {
   static const kProfileView = '/profileView';
   static const kFavoriteView = '/favoriteView';
   static const kRecipeDetailsView = '/recipeDetailsView';
+  static const kAddYourIngredientsView = '/addIngredientsView';
 
   static final GoRouter router = GoRouter(
     initialLocation: kSplashView,
@@ -130,6 +138,25 @@ abstract class AppRouter {
         path: kProfileView,
         builder: (context, state) {
           return const ProfileView();
+        },
+      ),
+      GoRoute(
+        path: kAddYourIngredientsView,
+        builder: (context, state) {
+          return BlocProvider(
+            create:
+                (context) => RecipeBloc(
+                  fetchRecipeUseCase: FetchRecipeUseCase(
+                    repository: RecipeRepositoryImpl(
+                      geminiApi: GeminiApiService(
+                      ),
+                      recipeApi: RecipeApiService(),
+                      firestore: FirebaseFirestore.instance,
+                    ),
+                  ),
+                ),
+            child: const RecipePage(),
+          );
         },
       ),
       GoRoute(
