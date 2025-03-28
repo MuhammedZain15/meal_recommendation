@@ -1,15 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class FirebaseAuthService {
-  Future<void> loginWithEmailAndPassword({
+  Future<User?> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
 
-  Future<void> registerWithEmailAndPassword({
+  Future<User?> signUpWithEmailAndPassword({
     required String email,
     required String password,
   });
+  Future<User?> signInWithGoogle();
+  Future<void> saveUserData(String uid, Map<String, dynamic> data);
   Stream<User?> authStateChanges();
 
   User? get currentUser;
