@@ -65,9 +65,9 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) => ProfileBloc(
-              getUser: sl<GetProfileUseCase>(),
-              updateUser: sl<UpdateProfileUseCase>(),
-            ),
+                  getUser: sl<GetProfileUseCase>(),
+                  updateUser: sl<UpdateProfileUseCase>(),
+                ),
             child: const LayoutView(),
           );
         },
@@ -99,10 +99,10 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) => LoginCubit(
-              loginWithEmailAndPasswordUseCase:
-              sl<LoginWithEmailAndPasswordUseCase>(),
-              loginWithGoogleUseCase: sl<LoginWithGoogleUseCase>(),
-            ),
+                  loginWithEmailAndPasswordUseCase:
+                      sl<LoginWithEmailAndPasswordUseCase>(),
+                  loginWithGoogleUseCase: sl<LoginWithGoogleUseCase>(),
+                ),
             child: const LoginView(),
           );
         },
@@ -114,10 +114,10 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) => RegisterBloc(
-              signUpWithEmail: sl<SignUpWithEmailUseCase>(),
-              signInWithGoogle: sl<SignInWithGoogleUseCase>(),
-              signInWithFacebook: sl<SignInWithFacebookUseCase>(),
-            ),
+                  signUpWithEmail: sl<SignUpWithEmailUseCase>(),
+                  signInWithGoogle: sl<SignInWithGoogleUseCase>(),
+                  signInWithFacebook: sl<SignInWithFacebookUseCase>(),
+                ),
             child: const RegisterView(),
           );
         },
@@ -129,7 +129,7 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) =>
-            FavoritesCubit(sl<GetFavoriteMeals>())..fetchFavorites(),
+                    FavoritesCubit(sl<GetFavoriteMeals>())..fetchFavorites(),
             child: const FavoriteView(),
           );
         },
@@ -152,14 +152,14 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) => RecipeBloc(
-              fetchRecipeUseCase: FetchRecipeUseCase(
-                repository: GeminiRepositoryImpl(
-                  geminiApi: GeminiApiService(),
-                  recipeApi: RecipeApiService(),
-                  firestore: FirebaseFirestore.instance,
+                  fetchRecipeUseCase: FetchRecipeUseCase(
+                    repository: GeminiRepositoryImpl(
+                      geminiApi: GeminiApiService(),
+                      recipeApi: SpoonacularApiService(),
+                      firestore: FirebaseFirestore.instance,
+                    ),
+                  ),
                 ),
-              ),
-            ),
             child: const RecipePage(),
           );
         },

@@ -7,6 +7,10 @@ import 'package:meal_recommendation/core/utils/app_strings.dart';
 
 import '../../../data/models/recipe_model.dart';
 import '../../logic/recipe_cubit.dart';
+import 'build_widgets/build_directioon_step.dart';
+
+import 'build_widgets/build_nutrition_row.dart';
+import 'build_widgets/build_section.dart';
 
 class RecipeDetailsViewBody extends StatelessWidget {
   final RecipeModel recipe;
@@ -91,7 +95,7 @@ class RecipeDetailsViewBody extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Summary
-                _buildSection(
+                buildSection(
                   title: AppStrings.kSummary,
                   child: Text(
                     recipe.summary,
@@ -105,7 +109,7 @@ class RecipeDetailsViewBody extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Ingredients
-                _buildSection(
+                buildSection(
                   title: AppStrings.kIngredients,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,16 +145,16 @@ class RecipeDetailsViewBody extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Directions
-                _buildSection(
+                buildSection(
                   title: AppStrings.kDirections,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildDirectionStep(1, recipe.directions.firstStep),
-                      _buildDirectionStep(2, recipe.directions.secondStep),
+                      buildDirectionStep(1, recipe.directions.firstStep),
+                      buildDirectionStep(2, recipe.directions.secondStep),
                       ...List.generate(
                         recipe.directions.additionalSteps.length,
-                        (index) => _buildDirectionStep(
+                        (index) => buildDirectionStep(
                           index + 3,
                           recipe.directions.additionalSteps[index],
                         ),
@@ -162,18 +166,18 @@ class RecipeDetailsViewBody extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Nutrition
-                _buildSection(
+                buildSection(
                   title: 'Nutrition',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildNutritionRow('Calories', recipe.nutrition.calories),
-                      _buildNutritionRow(
+                      buildNutritionRow('Calories', recipe.nutrition.calories),
+                      buildNutritionRow(
                         'Protein',
                         '${recipe.nutrition.protein}g',
                       ),
-                      _buildNutritionRow('Carbs', '${recipe.nutrition.carbs}g'),
-                      _buildNutritionRow('Fat', '${recipe.nutrition.fat}g'),
+                      buildNutritionRow('Carbs', '${recipe.nutrition.carbs}g'),
+                      buildNutritionRow('Fat', '${recipe.nutrition.fat}g'),
                       const SizedBox(height: 8),
                       Text(
                         'Vitamins: ${recipe.nutrition.vitamins.join(", ")}',
@@ -192,80 +196,6 @@ class RecipeDetailsViewBody extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildSection({required String title, required Widget child}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: AppColors.kPrimary,
-          ),
-        ),
-        const SizedBox(height: 12),
-        child,
-      ],
-    );
-  }
-
-  Widget _buildDirectionStep(int stepNumber, String instruction) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 28,
-            height: 28,
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.kPrimary,
-            ),
-            child: Text(
-              stepNumber.toString(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              instruction,
-              style: const TextStyle(fontSize: 16, color: AppColors.kDarkGrey),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNutritionRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Row(
-        children: [
-          Text(
-            '$label: ',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: AppColors.kDarkGrey,
-            ),
-          ),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 16, color: AppColors.kDarkGrey),
-          ),
-        ],
-      ),
     );
   }
 }

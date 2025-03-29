@@ -38,22 +38,12 @@ class RecipeInitializer {
               .collection('recipes')
               .limit(1)
               .get();
-
-      if (userRecipesSnapshot.docs.isEmpty) {
-        print(
-          'Initializing recipe database with sample data for user $userId...',
-        );
-        await _addSampleRecipes(firestore, userId);
-        print('Recipe database initialized successfully for user $userId!');
-      } else {
-        print('User $userId already has recipes. Skipping initialization.');
-      }
     } catch (e) {
       print('Error initializing recipes: $e');
     }
   }
 
-  static Future<void> _addSampleRecipes(
+  /*static Future<void> _addSampleRecipes(
     FirebaseFirestore firestore,
     String userId,
   ) async {
@@ -329,4 +319,6 @@ class RecipeInitializer {
       throw e;
     }
   }
+}
+*/
 }

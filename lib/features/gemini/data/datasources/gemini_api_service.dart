@@ -1,12 +1,13 @@
 import 'dart:convert';
-
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'recipe_data_source.dart';
 
-class GeminiApiService {
+class GeminiApiService implements RecipeDataSource {
   final String apiKey = "AIzaSyC_mVY7x4XkUsWrkQTdNZdxYWoGWyrzaic";
 
   GeminiApiService();
 
+  @override
   Future<Map<String, dynamic>> fetchRecipe(String dishName) async {
     final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
     final prompt = '''
@@ -25,7 +26,12 @@ class GeminiApiService {
 
     final response = await model.generateContent([Content.text(prompt)]);
     final cleanedResponse =
-        response.text?.replaceAll('```json', '').replaceAll('```', '').trim();
-    return json.decode(cleanedResponse ?? "");
+    response.text?.replaceAll('```json', '').replaceAll('```', '').trim();
+    return json.decode(cleanedResponse ?? "{}");
+  }
+
+  @override
+  Future<String?> fetchRecipeImage(String dishName) async {
+    return null;
   }
 }

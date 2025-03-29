@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meal_recommendation/features/gemini/presentation/pages/widgets/recipe_input.dart';
+import 'package:meal_recommendation/features/gemini/presentation/pages/widgets/recipe_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/recipe_bloc.dart';
 
@@ -74,32 +76,9 @@ class _RecipePageState extends State<RecipePage> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Expanded(
-                  child: TextFormField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      hintText: "Enter dish name...",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
+                Expanded(child: RecipeTextField(controller: _controller)),
                 const SizedBox(width: 10),
-                FloatingActionButton(
-                  onPressed:
-                      userId == null
-                          ? null
-                          : () {
-                            if (_controller.text.isNotEmpty) {
-                              context.read<RecipeBloc>().add(
-                                FetchRecipeEvent(userId!, _controller.text),
-                              );
-                              _controller.clear();
-                            }
-                          },
-                  child: const Icon(Icons.send),
-                ),
+                RecipeButton(userId: userId, controller: _controller),
               ],
             ),
           ),

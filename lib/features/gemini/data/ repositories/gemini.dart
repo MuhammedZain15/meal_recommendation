@@ -8,7 +8,7 @@ import '../models/recipe_model.dart';
 
 class GeminiRepositoryImpl implements RecipeRepository {
   final GeminiApiService geminiApi;
-  final RecipeApiService recipeApi;
+  final SpoonacularApiService recipeApi;
   final FirebaseFirestore firestore;
 
   GeminiRepositoryImpl({
