@@ -1,75 +1,102 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:meal_recommendation/core/utils/app_colors.dart';
+import 'app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 abstract class AppStyles {
-  // font size 11
-  static TextStyle font11W500WhiteColor = GoogleFonts.inter(
-    fontSize: 11,
+  static TextStyle get font11W500WhiteColor => TextStyle(
+    fontSize: 11.sp,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   );
 
-  // font size 12
-  static TextStyle font12W500WhiteColor = GoogleFonts.inter(
-    fontSize: 12,
+  static TextStyle get font12W500WhiteColor => TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   );
-  // font size 13
-  static TextStyle font13W700PrimaryColor = GoogleFonts.inter(
-    fontSize: 13,
+  static TextStyle get font12W500PrimartColor => TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.kPrimary,
+  );
+  static TextStyle get font12W500DarkGreyColor => TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.kDarkGrey,
+  );
+  static TextStyle get font13W700PrimaryColor => TextStyle(
+    fontSize: 13.sp,
     fontWeight: FontWeight.w700,
     color: AppColors.kPrimary,
   );
 
-  // font size 14
-
-  static TextStyle font14W500WhiteColor = GoogleFonts.inter(
-    fontSize: 14,
+  static TextStyle get font14W500WhiteColor => TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   );
-  static TextStyle textStyle13(BuildContext context) => TextStyle(
-        fontSize: 13.sp        ,       color: Colors.grey[600],
-        fontWeight: FontWeight.bold,
-      );
 
-  static TextStyle font14W600WhiteColor = GoogleFonts.inter(
-    fontSize: 14,
+  static TextStyle get font14W600WhiteColor => TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
 
-  static TextStyle font14W700PrimaryColor = GoogleFonts.inter(
-    fontSize: 14,
+  static TextStyle get font14W700PrimaryColor => TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w700,
     color: AppColors.kPrimary,
   );
+  static TextStyle get font15Ww500PrimaryColor => TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.kPrimary,
+  );
+  static TextStyle get font15Ww500DarkGreyColor => TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.kDarkGrey,
+  );
+  static TextStyle get font16WBoldBlackColor => TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.kBlack,
+  );
 
-  // font size 18
-  static TextStyle font18W400WhiteColor = GoogleFonts.inter(
-    fontSize: 18,
+  static TextStyle get font18W400WhiteColor => TextStyle(
+    fontSize: 18.sp,
     fontWeight: FontWeight.w400,
     color: Colors.white,
   );
+  static TextStyle get font18BoldPrimaryColor => TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.kPrimary,
+  );
+  static TextStyle get font18BoldBlackColor => TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.kBlack,
+  );
+  static TextStyle get font20BoldBlackColor => TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.kBlack,
+  );
 
-  // font size 21
-  static TextStyle font21W700PrimaryColor = GoogleFonts.inter(
-    fontSize: 21,
+  static TextStyle get font21W700PrimaryColor => TextStyle(
+    fontSize: 21.sp,
     fontWeight: FontWeight.w700,
     color: AppColors.kPrimary,
   );
-  static TextStyle textStyle30(BuildContext context) => TextStyle(
-        fontSize: 30.sp,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      );
-  static TextStyle textStyle40(BuildContext context) => TextStyle(
-        fontSize: 40.sp,
-        color: Colors.grey[600],
-        fontWeight: FontWeight.bold,
-      );
+  static TextStyle get font22W700WhiteColor => TextStyle(
+    fontSize: 22.sp,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+  static TextStyle get font23BoldBlackColor => TextStyle(
+    fontSize: 23.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.kBlack,
+  );
 }

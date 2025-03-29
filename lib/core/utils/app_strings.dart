@@ -1,3 +1,43 @@
 class AppStrings {
-  static const String appName = 'Flutter Starter';
+  static const String kSkip = 'Skip';
+  static const String kNext = 'Next';
+  static const String kPrev = 'Prev';
+  static const String kLogin = 'Login';
+  static const String kRegister = 'Register';
+  static const String kRemeberMe = 'Remember me and keep me login';
+  static const String kUsername = 'Username';
+  static const String kPassword = 'Password';
+  static const String kDontHaveAccount = 'Don\'t have an account?';
+  static const String kLoginNow = 'Login now';
+  static const String kHaveAccount = 'Do you have account';
+  static const String kRegisterNow = 'Register now';
+  static const String kEmail = 'Email';
+  static const String kPhone = 'Phone';
+  static const String kByCreatingAccount =
+      'By creating an account, you agree to terms and conditions';
+  static const String kVerification = 'Verification';
+  static const String kContinue = 'Continue';
+  static const String kPleaseWait = 'Please wait...';
+  static const String kFilter = 'Filter';
+  static const String kReset = 'Reset';
+  static const String kMeal = 'Meal';
+  static const String kTime = 'Time';
+  static const String kDificulty = 'Dificulty';
+  static const String kNumberOfGredeints = 'Number of ingredients';
+  static const String kEnterYourIngredients = 'Enter your ingredients';
+  static const String kTrendingRecipes = 'Trending Recipes';
+  static const String kRecommendedRecipes = 'Recommended Recipes';
+  static const String kSummary = 'Summary';
+  static const String kIngredients = 'Ingredients';
+  static const String kMin = 'min';
+  static const String kDirections = 'Directions';
+  static const String kSearchRecipes = 'Search Recipes';
+  static const String kSeeAll = 'See all';
+  static const String kSave = 'Save';
+  static const String kHome = 'Home';
+  static const String kProfile = 'Profile';
+  static const String kSettings = 'Settings';
+  static const String kLogout = 'Logout';
+  static const String kFavourite = 'Favourite';
+  static const String  kAddYourIngredients = 'Add your ingredients';
 }
