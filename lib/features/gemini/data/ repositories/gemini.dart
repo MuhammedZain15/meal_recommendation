@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../domain/entities/recipe.dart';
+import '../../../home/data/models/recipe_model.dart';
+
 import '../../domain/repositories/recipe_repository.dart';
 import '../datasources/gemini_api_service.dart';
 import '../datasources/recipe_api_service.dart';
-import '../models/recipe_model.dart';
 
 class GeminiRepositoryImpl implements RecipeRepository {
   final GeminiApiService geminiApi;
@@ -18,7 +18,7 @@ class GeminiRepositoryImpl implements RecipeRepository {
   });
 
   @override
-  Future<Recipe> fetchRecipe(String userId, String dishName) async {
+  Future<RecipeModel> fetchRecipe(String userId, String dishName) async {
     try {
       // Fetch recipe details from Gemini API
       final jsonData = await geminiApi.fetchRecipe(dishName);
@@ -49,13 +49,14 @@ class GeminiRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<List<Recipe>> fetchUserRecipes(String userId) async {
+  Future<List<RecipeModel>> fetchUserRecipes(String userId) async {
     try {
-      final querySnapshot = await firestore
-          .collection('users')
-          .doc(userId)
-          .collection('recipes')
-          .get();
+      final querySnapshot =
+          await firestore
+              .collection('users')
+              .doc(userId)
+              .collection('recipes')
+              .get();
 
       return querySnapshot.docs
           .map((doc) => RecipeModel.fromJson(doc.data(), doc.id))

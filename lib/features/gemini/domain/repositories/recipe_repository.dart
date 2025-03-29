@@ -1,5 +1,6 @@
-import '../entities/recipe.dart';
+
+import '../../../home/data/models/recipe_model.dart';
 
 abstract class RecipeRepository {
-  Future<Recipe> fetchRecipe(String userId, String dishName);
+  Future<RecipeModel> fetchRecipe(String userId, String dishName);
 }

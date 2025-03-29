@@ -10,7 +10,7 @@ class RecipeInitial extends RecipeState {}
 class RecipeLoading extends RecipeState {}
 
 class RecipeLoaded extends RecipeState {
-  final Recipe recipe;
+  final RecipeModel recipe;
 
   RecipeLoaded(this.recipe);
 
@@ -19,7 +19,7 @@ class RecipeLoaded extends RecipeState {
 }
 
 class UserRecipesLoaded extends RecipeState {
-  final List<Recipe> recipes;
+  final List<RecipeModel> recipes;
 
   UserRecipesLoaded(this.recipes);
 

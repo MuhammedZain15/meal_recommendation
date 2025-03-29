@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_recommendation/core/utils/app_router.dart';
+import 'package:meal_recommendation/features/gemini/presentation/pages/widgets/fetch_gemini_widget.dart';
 import 'package:meal_recommendation/features/gemini/presentation/pages/widgets/recipe_input.dart';
 import 'package:meal_recommendation/features/gemini/presentation/pages/widgets/recipe_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../bloc/recipe_bloc.dart';
 
 class RecipePage extends StatefulWidget {
   const RecipePage({super.key});
@@ -45,43 +44,7 @@ class _RecipePageState extends State<RecipePage> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: BlocBuilder<RecipeBloc, RecipeState>(
-              builder: (context, state) {
-                if (state is RecipeLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is RecipeLoaded) {
-                  return ListView(
-                    padding: const EdgeInsets.all(16.0),
-                    children: [
-                      Image.network(state.recipe.imageUrl),
-                      const SizedBox(height: 10),
-                      Text(
-                        state.recipe.name,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        state.recipe.summary,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  );
-                } else if (state is RecipeError) {
-                  return Center(
-                    child: Text(
-                      state.message,
-                      style: const TextStyle(color: Colors.red),
-                    ),
-                  );
-                }
-                return const Center(child: Text("Search for a recipe"));
-              },
-            ),
-          ),
+          const Expanded(child: FetchGeminiWidget()),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
