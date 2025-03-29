@@ -27,13 +27,14 @@ class TrendingRecipeList extends StatelessWidget {
             image:
                 recipe.imageUrl.isNotEmpty
                     ? recipe.imageUrl
-                    : 'assets/images/food1.png', // Fallback image
+                    : 'assets/images/food1.png',
+            // Fallback image
             title: recipe.name,
             ingredientsCount: recipe.ingredients.length,
             time: recipe.time,
             isTrending: true,
             onTap: () {
-              context.push(AppRouter.kRecipeDetailsView);
+              context.push(AppRouter.kRecipeDetailsView, extra: recipe);
             },
           );
         },

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:meal_recommendation/core/utils/app_router.dart';
 import 'package:meal_recommendation/features/gemini/presentation/pages/widgets/recipe_input.dart';
 import 'package:meal_recommendation/features/gemini/presentation/pages/widgets/recipe_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +34,15 @@ class _RecipePageState extends State<RecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Recipe Chat")),
+      appBar: AppBar(
+        title: const Text("Recipe Chat"),
+        leading: IconButton(
+          onPressed: () {
+            GoRouter.of(context).pushReplacementNamed(AppRouter.kLayoutView);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(

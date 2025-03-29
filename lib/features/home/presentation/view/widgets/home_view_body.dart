@@ -8,7 +8,6 @@ import 'package:meal_recommendation/features/home/presentation/view/widgets/reci
 import '../../logic/recipe_cubit.dart';
 import 'search_section.dart';
 import 'add_ingredients_button.dart';
-import 'recipe_card_item.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
